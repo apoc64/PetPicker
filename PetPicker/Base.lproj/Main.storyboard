@@ -61,36 +61,98 @@
             </objects>
             <point key="canvasLocation" x="-753" y="175"/>
         </scene>
-        <!--View Controller-->
+        <!--Swipe View Controller-->
         <scene sceneID="FjE-TG-Fhw">
             <objects>
-                <viewController id="2VX-G2-qal" sceneMemberID="viewController">
+                <viewController id="2VX-G2-qal" customClass="SwipeViewController" customModule="PetPicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="axO-2W-Kha">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y48-rf-EGR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y48-rf-EGR">
                                 <rect key="frame" x="300" y="40" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Matches"/>
                                 <connections>
                                     <segue destination="vk9-b1-liU" kind="presentation" modalTransitionStyle="flipHorizontal" id="U3x-uE-L4m"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2T-A3-OaR">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2T-A3-OaR">
                                 <rect key="frame" x="16" y="40" width="44" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Profile"/>
                                 <connections>
                                     <segue destination="ta0-Ut-gv5" kind="presentation" modalTransitionStyle="flipHorizontal" id="Z9a-He-HVd"/>
                                 </connections>
                             </button>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fe-xL-p7q">
+                                <rect key="frame" x="16" y="101" width="343" height="477"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuY-y6-7hT">
+                                        <rect key="frame" x="8" y="8" width="61" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="61" id="8Fh-Nn-7hn"/>
+                                            <constraint firstAttribute="height" constant="36" id="ypE-WY-tzh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dbh-WI-11A">
+                                        <rect key="frame" x="8" y="40" width="327" height="274"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbv-4F-1MJ">
+                                        <rect key="frame" x="8" y="330" width="327" height="139"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="139" id="XnR-jL-AkW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="Dbh-WI-11A" firstAttribute="trailing" secondItem="rbv-4F-1MJ" secondAttribute="trailing" id="IlY-SX-Z2T"/>
+                                    <constraint firstItem="VuY-y6-7hT" firstAttribute="leading" secondItem="3Fe-xL-p7q" secondAttribute="leadingMargin" id="JdF-ae-okv"/>
+                                    <constraint firstItem="rbv-4F-1MJ" firstAttribute="bottom" secondItem="3Fe-xL-p7q" secondAttribute="bottomMargin" id="S4y-Vy-2Cn"/>
+                                    <constraint firstItem="Dbh-WI-11A" firstAttribute="trailing" secondItem="3Fe-xL-p7q" secondAttribute="trailingMargin" id="dje-Ks-UiG"/>
+                                    <constraint firstItem="VuY-y6-7hT" firstAttribute="leading" secondItem="Dbh-WI-11A" secondAttribute="leading" id="eJp-WT-glc"/>
+                                    <constraint firstItem="Dbh-WI-11A" firstAttribute="top" secondItem="3Fe-xL-p7q" secondAttribute="top" constant="40" id="esr-vA-Mjd"/>
+                                    <constraint firstItem="VuY-y6-7hT" firstAttribute="top" secondItem="3Fe-xL-p7q" secondAttribute="topMargin" id="mC9-ia-hrX"/>
+                                    <constraint firstItem="rbv-4F-1MJ" firstAttribute="top" secondItem="Dbh-WI-11A" secondAttribute="bottom" constant="16" id="wVO-3y-iSt"/>
+                                    <constraint firstItem="Dbh-WI-11A" firstAttribute="leading" secondItem="rbv-4F-1MJ" secondAttribute="leading" id="zZP-mB-dGd"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Lo0-de-hSy" appends="YES" id="Ke2-0z-CQj"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="leading" secondItem="axO-2W-Kha" secondAttribute="leadingMargin" id="2Oa-zp-XvA"/>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="trailing" secondItem="axO-2W-Kha" secondAttribute="trailingMargin" id="Db8-25-AxF"/>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="top" secondItem="axO-2W-Kha" secondAttribute="top" constant="101" id="KaG-nh-WEK"/>
+                            <constraint firstItem="Eaa-a0-gob" firstAttribute="bottom" secondItem="3Fe-xL-p7q" secondAttribute="bottom" constant="89" id="KcG-7B-wSe"/>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="leading" secondItem="f2T-A3-OaR" secondAttribute="leading" id="XSr-bu-nd9"/>
+                            <constraint firstItem="f2T-A3-OaR" firstAttribute="baseline" secondItem="y48-rf-EGR" secondAttribute="baseline" id="rm6-cr-qe5"/>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="trailing" secondItem="y48-rf-EGR" secondAttribute="trailing" id="tBP-jd-fxX"/>
+                            <constraint firstItem="3Fe-xL-p7q" firstAttribute="top" secondItem="y48-rf-EGR" secondAttribute="bottom" constant="31" id="z1S-SZ-ndz"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Eaa-a0-gob"/>
                     </view>
+                    <connections>
+                        <outlet property="card" destination="3Fe-xL-p7q" id="fPC-pA-kC5"/>
+                        <outlet property="cardDescription" destination="rbv-4F-1MJ" id="vzA-k4-bVk"/>
+                        <outlet property="cardImage" destination="Dbh-WI-11A" id="jP2-aY-nre"/>
+                        <outlet property="cardName" destination="VuY-y6-7hT" id="iWA-Xa-Qpi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxS-2g-NEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Lo0-de-hSy">
+                    <connections>
+                        <action selector="panCard:" destination="2VX-G2-qal" id="Nm3-sn-cr3"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1016.8" y="174.96251874062969"/>
         </scene>
@@ -167,6 +229,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="U3x-uE-L4m"/>
         <segue reference="rwY-h5-6Vc"/>
     </inferredMetricsTieBreakers>
 </document>
