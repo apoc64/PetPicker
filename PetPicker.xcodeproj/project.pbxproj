@@ -15,6 +15,7 @@
 		41E354842163E362008F508A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E354822163E362008F508A /* LaunchScreen.storyboard */; };
 		41E3548F2163E362008F508A /* PetPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3548E2163E362008F508A /* PetPickerTests.swift */; };
 		41E3549A2163E362008F508A /* PetPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E354992163E362008F508A /* PetPickerUITests.swift */; };
+		4DBE83C6216404050049EF75 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE83C5216404050049EF75 /* SwipeViewController.swift */; };
 		A1E173D28E13AEDDD52ED7A8 /* Pods_PetPickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E48823E5510E85974C70E6D /* Pods_PetPickerUITests.framework */; };
 		F57ADF41130989714F0D7A97 /* Pods_PetPickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		41E354992163E362008F508A /* PetPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPickerUITests.swift; sourceTree = "<group>"; };
 		41E3549B2163E362008F508A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C43EEC2EC8238DB07415EA /* Pods-PetPickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerUITests/Pods-PetPickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		4DBE83C5216404050049EF75 /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		6E48823E5510E85974C70E6D /* Pods_PetPickerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPickerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93FD2600EF5A74909F8C914A /* Pods-PetPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPicker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetPicker/Pods-PetPicker.debug.xcconfig"; sourceTree = "<group>"; };
 		9989873A5B859087B8483BAA /* Pods-PetPickerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerUITests/Pods-PetPickerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				41E354802163E362008F508A /* Assets.xcassets */,
 				41E354822163E362008F508A /* LaunchScreen.storyboard */,
 				41E354852163E362008F508A /* Info.plist */,
+				4DBE83C5216404050049EF75 /* SwipeViewController.swift */,
 			);
 			path = PetPicker;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 			files = (
 				41E3547C2163E361008F508A /* ViewController.swift in Sources */,
 				41E3547A2163E361008F508A /* AppDelegate.swift in Sources */,
+				4DBE83C6216404050049EF75 /* SwipeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
