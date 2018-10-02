@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01F88EB56AE6E7F19A65F10C /* Pods_PetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */; };
 		41E3547A2163E361008F508A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E354792163E361008F508A /* AppDelegate.swift */; };
 		41E3547C2163E361008F508A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3547B2163E361008F508A /* ViewController.swift */; };
 		41E3547F2163E361008F508A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E3547D2163E361008F508A /* Main.storyboard */; };
@@ -14,6 +15,8 @@
 		41E354842163E362008F508A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E354822163E362008F508A /* LaunchScreen.storyboard */; };
 		41E3548F2163E362008F508A /* PetPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3548E2163E362008F508A /* PetPickerTests.swift */; };
 		41E3549A2163E362008F508A /* PetPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E354992163E362008F508A /* PetPickerUITests.swift */; };
+		A1E173D28E13AEDDD52ED7A8 /* Pods_PetPickerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E48823E5510E85974C70E6D /* Pods_PetPickerUITests.framework */; };
+		F57ADF41130989714F0D7A97 /* Pods_PetPickerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPickerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E354762163E361008F508A /* PetPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E354792163E361008F508A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41E3547B2163E361008F508A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +52,13 @@
 		41E354952163E362008F508A /* PetPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E354992163E362008F508A /* PetPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPickerUITests.swift; sourceTree = "<group>"; };
 		41E3549B2163E362008F508A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45C43EEC2EC8238DB07415EA /* Pods-PetPickerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerUITests/Pods-PetPickerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E48823E5510E85974C70E6D /* Pods_PetPickerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPickerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FD2600EF5A74909F8C914A /* Pods-PetPicker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPicker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetPicker/Pods-PetPicker.debug.xcconfig"; sourceTree = "<group>"; };
+		9989873A5B859087B8483BAA /* Pods-PetPickerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerUITests/Pods-PetPickerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AEEAD77A939A9211A8995F30 /* Pods-PetPicker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPicker.release.xcconfig"; path = "Pods/Target Support Files/Pods-PetPicker/Pods-PetPicker.release.xcconfig"; sourceTree = "<group>"; };
+		CDA01D557374E25DB5A50BB1 /* Pods-PetPickerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerTests/Pods-PetPickerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FB67EF2C7C91D14760CC33E9 /* Pods-PetPickerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetPickerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PetPickerTests/Pods-PetPickerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F88EB56AE6E7F19A65F10C /* Pods_PetPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F57ADF41130989714F0D7A97 /* Pods_PetPickerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1E173D28E13AEDDD52ED7A8 /* Pods_PetPickerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +96,8 @@
 				41E3548D2163E362008F508A /* PetPickerTests */,
 				41E354982163E362008F508A /* PetPickerUITests */,
 				41E354772163E361008F508A /* Products */,
+				F489048FEB933295585ABA85 /* Pods */,
+				E459DBAC3FD3146563F4F666 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +142,29 @@
 			path = PetPickerUITests;
 			sourceTree = "<group>";
 		};
+		E459DBAC3FD3146563F4F666 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */,
+				1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */,
+				6E48823E5510E85974C70E6D /* Pods_PetPickerUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F489048FEB933295585ABA85 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93FD2600EF5A74909F8C914A /* Pods-PetPicker.debug.xcconfig */,
+				AEEAD77A939A9211A8995F30 /* Pods-PetPicker.release.xcconfig */,
+				CDA01D557374E25DB5A50BB1 /* Pods-PetPickerTests.debug.xcconfig */,
+				FB67EF2C7C91D14760CC33E9 /* Pods-PetPickerTests.release.xcconfig */,
+				45C43EEC2EC8238DB07415EA /* Pods-PetPickerUITests.debug.xcconfig */,
+				9989873A5B859087B8483BAA /* Pods-PetPickerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41E3549E2163E362008F508A /* Build configuration list for PBXNativeTarget "PetPicker" */;
 			buildPhases = (
+				7556E14AFF8C5E69B874E6F9 /* [CP] Check Pods Manifest.lock */,
 				41E354722163E361008F508A /* Sources */,
 				41E354732163E361008F508A /* Frameworks */,
 				41E354742163E361008F508A /* Resources */,
+				C0A8520E83CE83D7E201D935 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +191,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41E354A12163E362008F508A /* Build configuration list for PBXNativeTarget "PetPickerTests" */;
 			buildPhases = (
+				B00E2DC36A5859F249EB26F1 /* [CP] Check Pods Manifest.lock */,
 				41E354862163E362008F508A /* Sources */,
 				41E354872163E362008F508A /* Frameworks */,
 				41E354882163E362008F508A /* Resources */,
@@ -167,6 +210,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41E354A42163E362008F508A /* Build configuration list for PBXNativeTarget "PetPickerUITests" */;
 			buildPhases = (
+				0F51E1B9826C2F97095E1A88 /* [CP] Check Pods Manifest.lock */,
 				41E354912163E362008F508A /* Sources */,
 				41E354922163E362008F508A /* Frameworks */,
 				41E354932163E362008F508A /* Resources */,
@@ -250,6 +294,81 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F51E1B9826C2F97095E1A88 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetPickerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7556E14AFF8C5E69B874E6F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetPicker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B00E2DC36A5859F249EB26F1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PetPickerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0A8520E83CE83D7E201D935 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PetPicker/Pods-PetPicker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PetPicker/Pods-PetPicker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41E354722163E361008F508A /* Sources */ = {
@@ -430,9 +549,11 @@
 		};
 		41E3549F2163E362008F508A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93FD2600EF5A74909F8C914A /* Pods-PetPicker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M8WW8AWN3M;
 				INFOPLIST_FILE = PetPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,9 +568,11 @@
 		};
 		41E354A02163E362008F508A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEEAD77A939A9211A8995F30 /* Pods-PetPicker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M8WW8AWN3M;
 				INFOPLIST_FILE = PetPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +587,7 @@
 		};
 		41E354A22163E362008F508A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDA01D557374E25DB5A50BB1 /* Pods-PetPickerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -484,6 +608,7 @@
 		};
 		41E354A32163E362008F508A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB67EF2C7C91D14760CC33E9 /* Pods-PetPickerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -504,6 +629,7 @@
 		};
 		41E354A52163E362008F508A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45C43EEC2EC8238DB07415EA /* Pods-PetPickerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -523,6 +649,7 @@
 		};
 		41E354A62163E362008F508A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9989873A5B859087B8483BAA /* Pods-PetPickerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
