@@ -42,7 +42,6 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9q1-Px-JEd"/>
-                                    <segue destination="2VX-G2-qal" kind="show" id="b2E-SP-jjL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -67,6 +66,7 @@
                     <connections>
                         <outlet property="password" destination="4gC-mr-14w" id="mna-pb-l14"/>
                         <outlet property="userName" destination="4RC-k8-a19" id="hcj-0e-98Q"/>
+                        <segue destination="2VX-G2-qal" kind="show" identifier="successfulLogin" animates="NO" id="d6k-aN-HrX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -249,6 +249,6 @@
         <image name="Wanda" width="1200" height="900"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b2E-SP-jjL"/>
+        <segue reference="d6k-aN-HrX"/>
     </inferredMetricsTieBreakers>
 </document>
