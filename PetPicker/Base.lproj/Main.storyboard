@@ -168,10 +168,10 @@
             </objects>
             <point key="canvasLocation" x="1016.8" y="174.96251874062969"/>
         </scene>
-        <!--View Controller-->
+        <!--Profie View Controller-->
         <scene sceneID="OFa-kb-Owd">
             <objects>
-                <viewController id="ta0-Ut-gv5" sceneMemberID="viewController">
+                <viewController id="ta0-Ut-gv5" customClass="ProfieViewController" customModule="PetPicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bgo-23-4ar">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,12 +183,22 @@
                                     <segue destination="2VX-G2-qal" kind="presentation" modalTransitionStyle="flipHorizontal" id="k2I-1q-sk2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6c-SY-9dF">
+                                <rect key="frame" x="163.5" y="533" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="ta0-Ut-gv5" eventType="touchUpInside" id="4d4-Xz-udQ"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="SjP-1N-Pua"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NaS-PT-AkT" firstAttribute="trailing" secondItem="Hsz-CH-gsA" secondAttribute="trailing" constant="107" id="KlN-31-KgK"/>
                             <constraint firstItem="Hsz-CH-gsA" firstAttribute="leading" secondItem="NaS-PT-AkT" secondAttribute="leading" constant="107" id="azF-B9-aqw"/>
+                            <constraint firstItem="J6c-SY-9dF" firstAttribute="top" secondItem="Hsz-CH-gsA" secondAttribute="bottom" constant="8" id="cZs-zt-HBy"/>
                             <constraint firstItem="NaS-PT-AkT" firstAttribute="bottom" secondItem="Hsz-CH-gsA" secondAttribute="bottom" constant="142" id="llx-Gr-oDv"/>
+                            <constraint firstItem="J6c-SY-9dF" firstAttribute="centerX" secondItem="NaS-PT-AkT" secondAttribute="centerX" id="yZQ-us-zTn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NaS-PT-AkT"/>
                     </view>
@@ -249,6 +259,6 @@
         <image name="Wanda" width="1200" height="900"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d6k-aN-HrX"/>
+        <segue reference="k2I-1q-sk2"/>
     </inferredMetricsTieBreakers>
 </document>

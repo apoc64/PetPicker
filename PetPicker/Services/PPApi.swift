@@ -10,32 +10,37 @@ import Foundation
 import Alamofire
 
 class PPApi {
-//      get "/api/v1/users?name=#{user.name}&password=#{'5678'}"
     let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
+    var sender: UIViewController!
     
+    init(sendingVC: UIViewController) {
+        sender = sendingVC
+    }
     
     func login(name: String, password: String) -> User {
         let url = "\(baseUrl)/users?name=\(name)&password=\(password)"
         print(url)
-        loginUser(url: url)
+        loginApiCall(url: url)
         
         let user = User()
         return user
     }
-}
-func loginUser(url: String)  {
-    Alamofire.request(url).responseJSON { (response) in
-        if let dataDict :Dictionary = response.value as? [String: Any] {
-            newUser(data: dataDict)
+    
+    func loginApiCall(url: String)  {
+        Alamofire.request(url).responseJSON { (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                self.newUser(data: dataDict)
+            }
         }
+    }
+    
+    func newUser(data: [String: Any]) {
+        print(data)
+        let defaults = UserDefaults.standard
+        defaults.set(data["id"], forKey: "user_id")
+        
+        let id = defaults.integer(forKey: "user_id")
+        print(id)
     }
 }
 
-func newUser(data: [String: Any]) {
-    print(data)
-    let defaults = UserDefaults.standard
-    defaults.set(data["id"], forKey: "user_id")
-    
-    let id = defaults.integer(forKey: "user_id")
-    print(id)
-}

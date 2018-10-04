@@ -17,7 +17,7 @@ class ViewController: UIViewController {
    
         if let name = userName.text {
             if let pass = password.text {
-                let pp = PPApi()
+                let pp = PPApi(sendingVC: self)
                 let user = pp.login(name: name, password: pass)
                 print(user)
             }

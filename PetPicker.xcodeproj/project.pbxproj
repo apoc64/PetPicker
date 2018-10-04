@@ -10,6 +10,7 @@
 		01F88EB56AE6E7F19A65F10C /* Pods_PetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */; };
 		41B36F5F2165629900634E36 /* PPApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F5E2165629900634E36 /* PPApi.swift */; };
 		41B36F622165640B00634E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F612165640B00634E36 /* User.swift */; };
+		41B36F64216666EB00634E36 /* ProfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F63216666EB00634E36 /* ProfieViewController.swift */; };
 		41E3547A2163E361008F508A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E354792163E361008F508A /* AppDelegate.swift */; };
 		41E3547C2163E361008F508A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3547B2163E361008F508A /* ViewController.swift */; };
 		41E3547F2163E361008F508A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E3547D2163E361008F508A /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPickerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41B36F5E2165629900634E36 /* PPApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPApi.swift; sourceTree = "<group>"; };
 		41B36F612165640B00634E36 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		41B36F63216666EB00634E36 /* ProfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfieViewController.swift; sourceTree = "<group>"; };
 		41E354762163E361008F508A /* PetPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PetPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E354792163E361008F508A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41E3547B2163E361008F508A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				4DBE83C5216404050049EF75 /* SwipeViewController.swift */,
+				41B36F63216666EB00634E36 /* ProfieViewController.swift */,
 				41E3547B2163E361008F508A /* ViewController.swift */,
 			);
 			path = Controllers;
@@ -411,6 +414,7 @@
 				41B36F5F2165629900634E36 /* PPApi.swift in Sources */,
 				41E3547C2163E361008F508A /* ViewController.swift in Sources */,
 				41E3547A2163E361008F508A /* AppDelegate.swift in Sources */,
+				41B36F64216666EB00634E36 /* ProfieViewController.swift in Sources */,
 				41B36F622165640B00634E36 /* User.swift in Sources */,
 				4DBE83C6216404050049EF75 /* SwipeViewController.swift in Sources */,
 			);
