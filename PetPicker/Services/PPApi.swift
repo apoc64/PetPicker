@@ -10,32 +10,43 @@ import Foundation
 import Alamofire
 
 class PPApi {
-//      get "/api/v1/users?name=#{user.name}&password=#{'5678'}"
     let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
+    var sender: UIViewController!
     
+    init(sendingVC: UIViewController) {
+        sender = sendingVC // for async callbacks
+    }
     
-    func login(name: String, password: String) -> User {
+    func login(name: String, password: String) {
         let url = "\(baseUrl)/users?name=\(name)&password=\(password)"
         print(url)
-        loginUser(url: url)
-        
-        let user = User()
-        return user
+        loginApiCall(url: url)
     }
-}
-func loginUser(url: String)  {
-    Alamofire.request(url).responseJSON { (response) in
-        if let dataDict :Dictionary = response.value as? [String: Any] {
-            newUser(data: dataDict)
+    
+    func loginApiCall(url: String)  {
+        Alamofire.request(url).responseJSON { (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                self.newUser(data: dataDict)
+            }
+        }
+    }
+    
+    func newUser(data: [String: Any]) {
+        // check to see if successful, make a user
+        print(data)
+        if (data["message"] != nil) {
+            print(data["message"]!)
+        } else {
+            let defaults = UserDefaults.standard
+            defaults.set(data["id"], forKey: "user_id")
+            // User(data: data)...
+            let id = defaults.integer(forKey: "user_id")
+            print(id)
+            // what is prefered syntax?
+            if let vc = sender as! ViewController! {
+                vc.loginSegue() // sender performs segue
+            }
         }
     }
 }
 
-func newUser(data: [String: Any]) {
-    print(data)
-    let defaults = UserDefaults.standard
-    defaults.set(data["id"], forKey: "user_id")
-    
-    let id = defaults.integer(forKey: "user_id")
-    print(id)
-}

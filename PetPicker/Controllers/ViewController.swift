@@ -14,32 +14,32 @@ class ViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     @IBAction func login(_ sender: UIButton) {
-   
-        if let name = userName.text {
-            if let pass = password.text {
-                let pp = PPApi()
-                let user = pp.login(name: name, password: pass)
-                print(user)
-            }
+        
+        if let name = userName.text, let pass = password.text {
+            let pp = PPApi(sendingVC: self)
+            pp.login(name: name, password: pass)
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    func loginSegue() {
+        performSegue(withIdentifier: "successfulLogin", sender: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // check to see if logged in already
         let defaults = UserDefaults.standard
         
         let id = defaults.integer(forKey: "user_id")
         print(id)
         if id > 0 {
             print("I should segue")
-            self.performSegue(withIdentifier: "successfulLogin", sender: nil)
+            self.loginSegue()
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        // Get the new view controller using segue.destination.
 //        // Pass the selected object to the new view controller.
