@@ -14,16 +14,13 @@ class PPApi {
     var sender: UIViewController!
     
     init(sendingVC: UIViewController) {
-        sender = sendingVC
+        sender = sendingVC // for async callbacks
     }
     
-    func login(name: String, password: String) -> User {
+    func login(name: String, password: String) {
         let url = "\(baseUrl)/users?name=\(name)&password=\(password)"
         print(url)
         loginApiCall(url: url)
-        
-        let user = User()
-        return user
     }
     
     func loginApiCall(url: String)  {
@@ -35,12 +32,21 @@ class PPApi {
     }
     
     func newUser(data: [String: Any]) {
+        // check to see if successful, make a user
         print(data)
-        let defaults = UserDefaults.standard
-        defaults.set(data["id"], forKey: "user_id")
-        
-        let id = defaults.integer(forKey: "user_id")
-        print(id)
+        if (data["message"] != nil) {
+            print(data["message"]!)
+        } else {
+            let defaults = UserDefaults.standard
+            defaults.set(data["id"], forKey: "user_id")
+            // User(data: data)...
+            let id = defaults.integer(forKey: "user_id")
+            print(id)
+            // what is prefered syntax?
+            if let vc = sender as! ViewController! {
+                vc.loginSegue() // sender performs segue
+            }
+        }
     }
 }
 
