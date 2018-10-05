@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         let id = defaults.integer(forKey: "user_id")
         // get actual user object
         let user = User(data: ["id": id])
-        print(user)
+//        print(user)
         if id > 0 {
             print("I should segue")
             self.loginSegue(user: user)

@@ -18,12 +18,16 @@ class PPApi {
     }
     
     func login(name: String, password: String) {
-        let url = "\(baseUrl)/users?name=\(name)&password=\(password)"
-        print(url)
+        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        print(encodedName!)
+        let encodedPassword = password.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        print(encodedPassword!)
+        let url = "\(baseUrl)/users?name=\(encodedName!)&password=\(encodedPassword!)"
         loginApiCall(url: url)
     }
     
     func loginApiCall(url: String)  {
+        print(url)
         Alamofire.request(url).responseJSON { (response) in
             if let dataDict :Dictionary = response.value as? [String: Any] {
                 self.newUser(data: dataDict)
