@@ -32,19 +32,16 @@ class PPApi {
     }
     
     func newUser(data: [String: Any]) {
-        // check to see if successful, make a user
-        print(data)
+        // check to see if successful
         if (data["message"] != nil) {
             print(data["message"]!)
+            // handle failed login
         } else {
-            let defaults = UserDefaults.standard
-            defaults.set(data["id"], forKey: "user_id")
-            // User(data: data)...
-            let id = defaults.integer(forKey: "user_id")
-            print(id)
-            // what is prefered syntax?
-            if let vc = sender as! ViewController! {
-                vc.loginSegue() // sender performs segue
+            let user = User(data: data)
+            user.setAsDefault()
+            
+            if let vc = sender as? ViewController {
+                vc.loginSegue(user: user) // sender performs segue
             }
         }
     }

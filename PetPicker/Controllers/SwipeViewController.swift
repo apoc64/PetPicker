@@ -9,6 +9,8 @@
 import UIKit
 
 class SwipeViewController: UIViewController {
+    
+    var currentUser: User!
 
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
@@ -16,6 +18,7 @@ class SwipeViewController: UIViewController {
     
     @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var cardDescription: UILabel!
+    
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
         let point = sender.translation(in: view)
