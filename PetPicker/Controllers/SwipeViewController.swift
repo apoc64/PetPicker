@@ -63,6 +63,10 @@ class SwipeViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(currentUser?.name ?? "no user name")
+    }
+    
     func resetCard() {
         UIView.animate(withDuration: 0.2, animations: {
             self.card.center = self.view.center

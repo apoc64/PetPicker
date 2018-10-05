@@ -37,6 +37,7 @@ class PPApi {
     
     func newUser(data: [String: Any]) {
         // check to see if successful
+        print(data)
         if (data["message"] != nil) {
             print(data["message"]!)
             // handle failed login
