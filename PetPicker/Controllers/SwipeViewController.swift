@@ -56,6 +56,7 @@ class SwipeViewController: UIViewController {
         super.viewDidLoad()
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
+        print("Current User: \(String(describing: currentUser)), \(String(describing: currentUser.name)), \(String(describing: currentUser.id))")
     }
     
     func resetCard() {
