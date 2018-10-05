@@ -30,4 +30,11 @@ class User {
         let defaults = UserDefaults.standard
         defaults.set(id, forKey: "user_id")
     }
+    
+    class func getUserFromDefault() -> User {
+        let defaults = UserDefaults.standard
+        let id = defaults.integer(forKey: "user_id")
+        let user = User(data: ["id": id])
+        return user
+    }
 }
