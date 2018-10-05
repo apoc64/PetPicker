@@ -34,13 +34,14 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // check to see if logged in already
-        let defaults = UserDefaults.standard
-        let id = defaults.integer(forKey: "user_id")
-        // get actual user object
-        let user = User(data: ["id": id])
-//        print(user)
-        if id > 0 {
+//        // check to see if logged in already
+//        let defaults = UserDefaults.standard
+//        let id = defaults.integer(forKey: "user_id")
+//        // get actual user object
+//        let user = User(data: ["id": id])
+////        print(user)
+       let user = User.getUserFromDefault()
+        if user.id > 0 {
             print("I should segue")
             self.loginSegue(user: user)
         }

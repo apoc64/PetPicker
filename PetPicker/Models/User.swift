@@ -21,13 +21,25 @@ class User {
         name = data["name"] as? String
         key = data["key"] as? String
         speciesToAdopt = data["species_to_adopt"] as? String
-        description = data["dascription"] as? String
+        description = data["description"] as? String
         pic = data["pic"] as? String
     }
     
     func setAsDefault() {
         // store key?
         let defaults = UserDefaults.standard
-        defaults.set(id, forKey: "user_id")
+        let userData = ["id": id, "name": name, "description": description] as [String : Any]
+        defaults.set(userData, forKey: "user")
+//        defaults.set(name, forKey: "name")
+//        defaults.set(description, forKey: "description")
+    }
+    
+    class func getUserFromDefault() -> User {
+        let defaults = UserDefaults.standard
+        if let userInfo = defaults.dictionary(forKey: "user") {
+            let user = User(data: userInfo )
+            return user
+        }
+        return User(data: ["id": 0])
     }
 }

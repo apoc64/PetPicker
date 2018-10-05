@@ -10,7 +10,7 @@ import UIKit
 
 class SwipeViewController: UIViewController {
     
-    var currentUser: User!
+    var currentUser: User?
 
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
@@ -56,7 +56,15 @@ class SwipeViewController: UIViewController {
         super.viewDidLoad()
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
-        print("Current User: \(String(describing: currentUser)), \(String(describing: currentUser.name)), \(String(describing: currentUser.id))")
+        if let user = currentUser  {
+        print("Current user: \(String(describing: user)), \(String(describing: user.name)), \(String(describing: user.id))")
+        } else {
+            currentUser = User.getUserFromDefault()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(currentUser?.name ?? "no user name")
     }
     
     func resetCard() {

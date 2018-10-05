@@ -12,7 +12,7 @@ class ProfieViewController: UIViewController {
 
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         let defaults = UserDefaults.standard
-        defaults.set(0, forKey: "user_id")
+        defaults.set(0, forKey: "user")
     }
     
     override func viewDidLoad() {
