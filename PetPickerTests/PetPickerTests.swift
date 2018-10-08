@@ -19,9 +19,13 @@ class PetPickerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInitNewUser() {
+        let data = ["id": 2, "name": "bob","key": "1234", "species_to_adopt": "dog", "description": "gimme puppers", "pic": "www.google.com/mypic.png"] as [String : Any]
+        let user = User(data: data)
+        
+        XCTAssert(user.id == 2)
+        XCTAssert(user.name == "bob")
+        XCTAssert(user.description == "gimme puppers")
     }
 
     func testPerformanceExample() {
