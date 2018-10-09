@@ -14,20 +14,51 @@ class SwipeViewController: UIViewController {
     
     var currentUser: User?
     var pets: [Pet] = []
+    
     func addPets(newPets: [Pet]){
         pets.append(contentsOf: newPets)
-        print(pets.first?.name)
-        cardImage.sd_setImage(with: URL(string: pets.first!.pic), placeholderImage: UIImage(named: "placeholder.png"))
-        cardName.text = pets.first!.name
-        cardDescription.text = pets.first!.description
+        setPetForCard()
+    }
+    
+    func setPetForCard() {
+        var pet = pets.removeFirst()
+        // Set top card
+        cardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cardName.text = pet.name
+        cardDescription.text = pet.description
+        
+        pet = pets.first!
+        print("Setting bg card")
+        bgCardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        bgCardName.text = pet.name
+        bgCardDescription.text = pet.description
+    }
+    
+    func likePet() {
+        print("like")
+        resetCard()
+        setPetForCard()
+    }
+    
+    func nopePet() {
+        print("nope")
+        resetCard()
+        setPetForCard()
     }
 
+    // Bottom Card
+    @IBOutlet weak var bgCard: UIView!
+    @IBOutlet weak var bgCardImage: UIImageView!
+    @IBOutlet weak var bgCardName: UILabel!
+    @IBOutlet weak var bgCardDescription: UILabel!
+    
+    // Top card
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
-    var divisor: CGFloat!
-    
     @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var cardDescription: UILabel!
+    
+    var divisor: CGFloat!
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
@@ -45,7 +76,8 @@ class SwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { _ in
-                    self.cardName.text = "Nope!"
+                    self.nopePet()
+//                    self.cardName.text = "Nope!"
                 })
                 return
             } else if card.center.x > (view.frame.width - 75) {
@@ -54,7 +86,8 @@ class SwipeViewController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { _ in
-                    self.cardName.text = "Like!"
+                    self.likePet()
+//                    self.cardName.text = "Like!"
                 })
                 return
             }
@@ -82,7 +115,7 @@ class SwipeViewController: UIViewController {
     }
     
     func resetCard() {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.0, animations: {
             self.card.center = self.view.center
             self.card.alpha = 1
             self.card.transform = .identity
