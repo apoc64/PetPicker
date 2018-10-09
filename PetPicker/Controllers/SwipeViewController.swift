@@ -11,6 +11,7 @@ import UIKit
 class SwipeViewController: UIViewController {
     
     var currentUser: User?
+    var pets: [Pet] = []
 
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
@@ -54,6 +55,7 @@ class SwipeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
         if let user = currentUser  {
@@ -61,6 +63,9 @@ class SwipeViewController: UIViewController {
         } else {
             currentUser = User.getUserFromDefault()
         }
+        
+        
+        pp.getPets(id: currentUser!.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +79,11 @@ class SwipeViewController: UIViewController {
             self.card.transform = .identity
         })
         cardName.text = ""
+    }
+    
+    func addPets(newPets: [Pet]){
+        pets.append(contentsOf: newPets)
+        print(pets.first?.name)
     }
     
 
