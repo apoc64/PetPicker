@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 class SwipeViewController: UIViewController {
     
@@ -84,6 +86,7 @@ class SwipeViewController: UIViewController {
     func addPets(newPets: [Pet]){
         pets.append(contentsOf: newPets)
         print(pets.first?.name)
+        cardImage.sd_setImage(with: URL(string: pets.first!.pic), placeholderImage: UIImage(named: "placeholder.png"))
     }
     
 
