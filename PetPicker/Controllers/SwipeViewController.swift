@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import SDWebImage
+
 
 class SwipeViewController: UIViewController {
     
     var currentUser: User?
+    var pets: [Pet] = []
+    func addPets(newPets: [Pet]){
+        pets.append(contentsOf: newPets)
+        print(pets.first?.name)
+        cardImage.sd_setImage(with: URL(string: pets.first!.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cardName.text = pets.first!.name
+        cardDescription.text = pets.first!.description
+    }
 
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
@@ -54,6 +64,7 @@ class SwipeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
         if let user = currentUser  {
@@ -61,6 +72,9 @@ class SwipeViewController: UIViewController {
         } else {
             currentUser = User.getUserFromDefault()
         }
+        
+        
+        pp.getPets(id: currentUser!.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +89,8 @@ class SwipeViewController: UIViewController {
         })
         cardName.text = ""
     }
+    
+ 
     
 
     /*

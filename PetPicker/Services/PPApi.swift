@@ -12,6 +12,7 @@ import Alamofire
 class PPApi {
     let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
     var sender: UIViewController!
+    var pets: [Pet]!
     
     init(sendingVC: UIViewController) {
         sender = sendingVC // for async callbacks
@@ -35,6 +36,29 @@ class PPApi {
         }
     }
     
+    func getPets(id: Int) {
+        let url = "\(baseUrl)/users/\(id)/pets"
+        Alamofire.request(url).responseJSON { (response) in
+            if let dataArray :Array = response.value as? [[String: Any]] {
+                self.newPets(data: dataArray)
+            }
+        }
+    }
+    
+    func newPets(data: [[String: Any]]) {
+        // check to see if successful
+//        print(data)
+        
+        let pets = data.map({
+            (value: [String: Any]) -> Pet in
+            return Pet(data: value)
+        })
+//        print(pets)
+        if let vc = sender as? SwipeViewController {
+            vc.addPets(newPets: pets) // sender performs segue
+        }
+    }
+    
     func newUser(data: [String: Any]) {
         // check to see if successful
         print(data)
@@ -50,5 +74,6 @@ class PPApi {
             }
         }
     }
+    
 }
 
