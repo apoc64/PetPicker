@@ -14,6 +14,13 @@ class SwipeViewController: UIViewController {
     
     var currentUser: User?
     var pets: [Pet] = []
+    func addPets(newPets: [Pet]){
+        pets.append(contentsOf: newPets)
+        print(pets.first?.name)
+        cardImage.sd_setImage(with: URL(string: pets.first!.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cardName.text = pets.first!.name
+        cardDescription.text = pets.first!.description
+    }
 
     @IBOutlet weak var card: UIView!
     @IBOutlet weak var cardName: UILabel!
@@ -83,11 +90,7 @@ class SwipeViewController: UIViewController {
         cardName.text = ""
     }
     
-    func addPets(newPets: [Pet]){
-        pets.append(contentsOf: newPets)
-        print(pets.first?.name)
-        cardImage.sd_setImage(with: URL(string: pets.first!.pic), placeholderImage: UIImage(named: "placeholder.png"))
-    }
+ 
     
 
     /*
