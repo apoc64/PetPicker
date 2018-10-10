@@ -8,13 +8,23 @@
 
 import UIKit
 
-class MatchesTableTableViewController: UITableViewController {
+class MatchesTableViewController: UITableViewController {
     
-    let dataSource = ["Hi", "Bye", "Poop"]
+    var currentUser: User?
+    var dataSource: [Match] = []
+    var pp: PPApi!
+    
+    func addMatches(matches: [Match]) {
+        dataSource.append(contentsOf: matches)
+        tableView.reloadData()
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        pp = PPApi(sendingVC: self)
+        pp.getMatches(id: currentUser!.id)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,7 +48,7 @@ class MatchesTableTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        cell.textLabel!.text = dataSource[indexPath.row]
+        cell.textLabel!.text = dataSource[indexPath.row].name
 
         return cell
     }

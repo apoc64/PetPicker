@@ -55,6 +55,26 @@ class PPApi {
         }
     }
     
+    func getMatches(id: Int) {
+        let url = "\(baseUrl)/users/\(id)/matches"
+        Alamofire.request(url).responseJSON { (response) in
+            if let dataArray :Array = response.value as? [[String: Any]] {
+                self.newMatches(data: dataArray)
+                print(dataArray)
+            }
+        }
+    }
+    
+    func newMatches(data: [[String: Any]]) {
+        let matches = data.map({
+            (value: [String: Any]) -> Match in
+            return Match(data: value)
+        })
+        if let vc = sender as? MatchesTableViewController {
+            vc.addMatches(matches: matches)
+        }
+    }
+    
     func newUser(data: [String: Any]) {
         // check to see if successful
         print(data)
