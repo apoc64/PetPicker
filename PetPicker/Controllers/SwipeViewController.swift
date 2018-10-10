@@ -14,6 +14,8 @@ class SwipeViewController: UIViewController {
     
     var currentUser: User?
     var pets: [Pet] = []
+    var currentPet: Pet!
+    var pp: PPApi!
     
     func addPets(newPets: [Pet]){
         pets.append(contentsOf: newPets)
@@ -21,13 +23,13 @@ class SwipeViewController: UIViewController {
     }
     
     func setPetForCard() {
-        var pet = pets.removeFirst()
+        currentPet = pets.removeFirst()
         // Set top card
-        cardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
-        cardName.text = pet.name
-        cardDescription.text = pet.description
+        cardImage.sd_setImage(with: URL(string: currentPet.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cardName.text = currentPet.name
+        cardDescription.text = currentPet.description
         
-        pet = pets.first!
+        let pet = pets.first!
         print("Setting bg card")
         bgCardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
         bgCardName.text = pet.name
@@ -36,13 +38,15 @@ class SwipeViewController: UIViewController {
     
     func likePet() {
         print("like")
-        resetCard()
+        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id)
+        resetCard(duration: 0)
         setPetForCard()
     }
     
     func nopePet() {
         print("nope")
-        resetCard()
+        pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id)
+        resetCard(duration: 0)
         setPetForCard()
     }
 
@@ -71,33 +75,31 @@ class SwipeViewController: UIViewController {
         
         if sender.state == UIGestureRecognizer.State.ended {
             if card.center.x < 75 {
-                // move to left
+                // move to left - nope
                 UIView.animate(withDuration: 0.2, animations: {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { _ in
                     self.nopePet()
-//                    self.cardName.text = "Nope!"
                 })
                 return
             } else if card.center.x > (view.frame.width - 75) {
-                // move right
+                // move right - like
                 UIView.animate(withDuration: 0.2, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 }, completion: { _ in
                     self.likePet()
-//                    self.cardName.text = "Like!"
                 })
                 return
             }
-            
-            resetCard()
+            resetCard(duration: 0.2)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let pp = PPApi(sendingVC: self)
+        pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
         if let user = currentUser  {
@@ -114,17 +116,13 @@ class SwipeViewController: UIViewController {
         print(currentUser?.name ?? "no user name")
     }
     
-    func resetCard() {
-        UIView.animate(withDuration: 0.0, animations: {
+    func resetCard(duration: Double) {
+        UIView.animate(withDuration: duration, animations: {
             self.card.center = self.view.center
             self.card.alpha = 1
             self.card.transform = .identity
         })
-        cardName.text = ""
     }
-    
- 
-    
 
     /*
     // MARK: - Navigation

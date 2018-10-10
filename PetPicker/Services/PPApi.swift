@@ -46,14 +46,10 @@ class PPApi {
     }
     
     func newPets(data: [[String: Any]]) {
-        // check to see if successful
-//        print(data)
-        
         let pets = data.map({
             (value: [String: Any]) -> Pet in
             return Pet(data: value)
         })
-//        print(pets)
         if let vc = sender as? SwipeViewController {
             vc.addPets(newPets: pets) // sender performs segue
         }
@@ -75,5 +71,22 @@ class PPApi {
         }
     }
     
+    func likePet(user_id: Int, pet_id: Int) {
+        let url = "\(baseUrl)/users/\(user_id)/connections"
+        Alamofire.request(url, method: .post, parameters: ["pet_id": pet_id], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                print(dataDict)
+            }
+        }
+    }
+    
+    func nopePet(user_id: Int, pet_id: Int) {
+        let url = "\(baseUrl)/users/\(user_id)/connections"
+        Alamofire.request(url, method: .delete, parameters: ["pet_id": pet_id], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                print(dataDict)
+            }
+        }
+    }
 }
 
