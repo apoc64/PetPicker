@@ -14,6 +14,7 @@ class SwipeViewController: UIViewController {
     
     var currentUser: User?
     var pets: [Pet] = []
+    var currentPet: Pet!
     
     func addPets(newPets: [Pet]){
         pets.append(contentsOf: newPets)
@@ -21,13 +22,13 @@ class SwipeViewController: UIViewController {
     }
     
     func setPetForCard() {
-        var pet = pets.removeFirst()
+        currentPet = pets.removeFirst()
         // Set top card
-        cardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
-        cardName.text = pet.name
-        cardDescription.text = pet.description
+        cardImage.sd_setImage(with: URL(string: currentPet.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cardName.text = currentPet.name
+        cardDescription.text = currentPet.description
         
-        pet = pets.first!
+        let pet = pets.first!
         print("Setting bg card")
         bgCardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
         bgCardName.text = pet.name
@@ -36,6 +37,7 @@ class SwipeViewController: UIViewController {
     
     func likePet() {
         print("like")
+        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id)
         resetCard()
         setPetForCard()
     }
@@ -95,9 +97,12 @@ class SwipeViewController: UIViewController {
             resetCard()
         }
     }
+    
+    var pp: PPApi!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let pp = PPApi(sendingVC: self)
+        pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         // Do any additional setup after loading the view.
         if let user = currentUser  {
