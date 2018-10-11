@@ -12,12 +12,27 @@ import SDWebImage
 
 class SwipeViewController: UIViewController {
     
+    // MARK: - Instance Variables
     var currentUser: User?
     var pets: [Pet] = []
     var currentPet: Pet!
     var pp: PPApi!
+    var divisor: CGFloat! // for animation - set in VDL
     
-    func addPets(newPets: [Pet]){
+    // MARK: - IB Outlets
+    // Bottom Card:
+    @IBOutlet weak var bgCard: UIView!
+    @IBOutlet weak var bgCardImage: UIImageView!
+    @IBOutlet weak var bgCardName: UILabel!
+    @IBOutlet weak var bgCardDescription: UILabel!
+    // Top card:
+    @IBOutlet weak var card: UIView!
+    @IBOutlet weak var cardName: UILabel!
+    @IBOutlet weak var cardImage: UIImageView!
+    @IBOutlet weak var cardDescription: UILabel!
+    
+    // MARK: - Pet Methods
+    func addPets(newPets: [Pet]){ // called from ppAPI
         pets.append(contentsOf: newPets)
         setPetForCard()
     }
@@ -29,40 +44,33 @@ class SwipeViewController: UIViewController {
         cardName.text = currentPet.name
         cardDescription.text = currentPet.description
         
-        let pet = pets.first!
-        print("Setting bg card")
+        let pet = pets.first! // Crashes when out of pets
+        // Set bg card
         bgCardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
         bgCardName.text = pet.name
         bgCardDescription.text = pet.description
     }
     
-    func likePet() {
-        print("like")
+    func likePet() { // Called from animation
         pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id)
         resetCard(duration: 0)
         setPetForCard()
     }
     
-    func nopePet() {
-        print("nope")
+    func nopePet() { // Called from animation
         pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id)
         resetCard(duration: 0)
         setPetForCard()
     }
-
-    // Bottom Card
-    @IBOutlet weak var bgCard: UIView!
-    @IBOutlet weak var bgCardImage: UIImageView!
-    @IBOutlet weak var bgCardName: UILabel!
-    @IBOutlet weak var bgCardDescription: UILabel!
     
-    // Top card
-    @IBOutlet weak var card: UIView!
-    @IBOutlet weak var cardName: UILabel!
-    @IBOutlet weak var cardImage: UIImageView!
-    @IBOutlet weak var cardDescription: UILabel!
-    
-    var divisor: CGFloat!
+    // MARK: - Animation Methods
+    func resetCard(duration: Double) {
+        UIView.animate(withDuration: duration, animations: {
+            self.card.center = self.view.center
+            self.card.alpha = 1
+            self.card.transform = .identity
+        })
+    }
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
         let card = sender.view!
@@ -97,18 +105,16 @@ class SwipeViewController: UIViewController {
         }
     }
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
-        // Do any additional setup after loading the view.
         if let user = currentUser  {
-        print("Current user: \(String(describing: user)), \(String(describing: user.name)), \(String(describing: user.id))")
+            print("Current user: \(String(describing: user)), \(String(describing: user.name)), \(String(describing: user.id))")
         } else {
             currentUser = User.getUserFromDefault()
         }
-        
-        
         pp.getPets(id: currentUser!.id)
     }
     
@@ -116,24 +122,9 @@ class SwipeViewController: UIViewController {
         print(currentUser?.name ?? "no user name")
     }
     
-    func resetCard(duration: Double) {
-        UIView.animate(withDuration: duration, animations: {
-            self.card.center = self.view.center
-            self.card.alpha = 1
-            self.card.transform = .identity
-        })
-    }
-
-    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         let vc = segue.destination as? MatchesTableViewController
-        // Pass the selected object to the new view controller.
         vc?.currentUser = currentUser
     }
-    
-
 }
