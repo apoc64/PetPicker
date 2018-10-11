@@ -34,33 +34,34 @@ class SwipeViewController: UIViewController {
     // MARK: - Pet Methods
     func addPets(newPets: [Pet]){ // called from ppAPI
         pets.append(contentsOf: newPets)
-        setPetForCard()
+        setPetsForCards()
     }
     
-    func setPetForCard() {
+    func setPetsForCards() {
         currentPet = pets.removeFirst()
-        // Set top card
-        cardImage.sd_setImage(with: URL(string: currentPet.pic), placeholderImage: UIImage(named: "placeholder.png"))
-        cardName.text = currentPet.name
-        cardDescription.text = currentPet.description
+        setPetForCard(pet: currentPet, cName: cardName, cImage: cardImage, cDescr: cardDescription)
         
-        let pet = pets.first! // Crashes when out of pets
-        // Set bg card
-        bgCardImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
-        bgCardName.text = pet.name
-        bgCardDescription.text = pet.description
+        // CRASHES WHEN OUT OF PETS:
+        let bgPet = pets.first!
+        setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
+    }
+    
+    func setPetForCard(pet: Pet, cName: UILabel, cImage: UIImageView, cDescr: UILabel) {
+        cImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
+        cName.text = pet.name
+        cDescr.text = pet.description
     }
     
     func likePet() { // Called from animation
         pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id)
         resetCard(duration: 0)
-        setPetForCard()
+        setPetsForCards()
     }
     
     func nopePet() { // Called from animation
         pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id)
         resetCard(duration: 0)
-        setPetForCard()
+        setPetsForCards()
     }
     
     // MARK: - Animation Methods
@@ -77,11 +78,11 @@ class SwipeViewController: UIViewController {
         let point = sender.translation(in: view)
         let xFromCenter = card.center.x - view.center.x
         
-        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y) // move card
         
-        card.transform = CGAffineTransform(rotationAngle: xFromCenter/divisor)
+        card.transform = CGAffineTransform(rotationAngle: xFromCenter/divisor) // rotate card
         
-        if sender.state == UIGestureRecognizer.State.ended {
+        if sender.state == UIGestureRecognizer.State.ended { // user lifts up finger
             if card.center.x < 75 {
                 // move to left - nope
                 UIView.animate(withDuration: 0.2, animations: {
@@ -100,10 +101,10 @@ class SwipeViewController: UIViewController {
                     self.likePet()
                 })
                 return
-            }
+            } // end if/else - card is close to edge - nike or nope
             resetCard(duration: 0.2)
-        }
-    }
+        } // end if user lifts finger
+    } // end pan gesture recognizer
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
