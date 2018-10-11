@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 
-
 class SwipeViewController: UIViewController {
     
     // MARK: - Instance Variables
@@ -33,17 +32,29 @@ class SwipeViewController: UIViewController {
     
     // MARK: - Pet Methods
     func addPets(newPets: [Pet]){ // called from ppAPI
-        pets.append(contentsOf: newPets)
-        setPetsForCards()
+        if !newPets.isEmpty {
+            print("Adding \(newPets.count) pets")
+            pets.append(contentsOf: newPets)
+            setPetsForCards()
+        } else {
+            print("API is out of pets")
+        }
     }
     
     func setPetsForCards() {
-        currentPet = pets.removeFirst()
-        setPetForCard(pet: currentPet, cName: cardName, cImage: cardImage, cDescr: cardDescription)
-        
+        if !pets.isEmpty {
+            currentPet = pets.removeFirst()
+            setPetForCard(pet: currentPet, cName: cardName, cImage: cardImage, cDescr: cardDescription)
+        } else {
+            print("pets is empty")
+        }
         // CRASHES WHEN OUT OF PETS:
-        let bgPet = pets.first!
-        setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
+        if let bgPet = pets.first {
+            setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
+        } else {
+            pp.getPets(id: currentUser!.id)
+            print("Out of pets")
+        }
     }
     
     func setPetForCard(pet: Pet, cName: UILabel, cImage: UIImageView, cDescr: UILabel) {
