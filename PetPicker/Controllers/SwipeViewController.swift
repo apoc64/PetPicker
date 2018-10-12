@@ -14,9 +14,10 @@ class SwipeViewController: UIViewController {
     // MARK: - Instance Variables
     var currentUser: User?
     var pets: [Pet] = []
-    var currentPet: Pet!
+    var currentPet: Pet! // make not !
     var pp: PPApi!
     var divisor: CGFloat! // for animation - set in VDL
+    var outOfPets: Bool = false
     
     // MARK: - IB Outlets
     // Bottom Card:
@@ -32,11 +33,12 @@ class SwipeViewController: UIViewController {
     
     // MARK: - Pet Methods
     func addPets(newPets: [Pet]){ // called from ppAPI
-        if !newPets.isEmpty {
+        if newPets.count > 1 {
             print("Adding \(newPets.count) pets")
             pets.append(contentsOf: newPets)
             setPetsForCards()
         } else {
+            outOfPets = true
             print("API is out of pets")
         }
     }
@@ -48,12 +50,14 @@ class SwipeViewController: UIViewController {
         } else {
             print("pets is empty")
         }
-        // CRASHES WHEN OUT OF PETS:
+        // used to crash - ???:
         if let bgPet = pets.first {
             setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
-        } else {
+        } else if !outOfPets {
             pp.getPets(id: currentUser!.id)
-            print("Out of pets")
+            print("Getting more pets")
+        } else {
+            print("I'm really out of pets this time")
         }
     }
     
@@ -64,7 +68,7 @@ class SwipeViewController: UIViewController {
     }
     
     func likePet() { // Called from animation
-        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id)
+        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
