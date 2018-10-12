@@ -20,6 +20,7 @@ class SwipeViewController: UIViewController {
     private var outOfPets = false
     private var stopAnimation = false
     private var nextTimeEnd = false
+    private var isFirstSwipe = true
     
     // MARK: - IB Outlets
     // Bottom Card:
@@ -42,6 +43,10 @@ class SwipeViewController: UIViewController {
         } else {
             outOfPets = true
             print("API is out of pets")
+            if isFirstSwipe {
+                nextTimeEnd = true
+                noPets()
+            }
         }
         setPetsForCards()
     }
