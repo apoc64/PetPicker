@@ -41,19 +41,18 @@ class PPApi {
         Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON
             { (response) in
                 if let dataDict :Dictionary = response.value as? [String: Any] {
+                    let user = User(data: data["user"] as! [String : Any])
+                    user.id = dataDict["id"] as? Int
+                    print(user.name, user.description)
+                    print("THIS IS THE DATA: \(data)")
+                    user.setAsDefault()
+                    if let vc = self.sender as? NewUserViewController {
+                        vc.loginSegue(user: user)
+                    }
                     print(dataDict)
                 }
             }
         }
-    
-//    func likePet(user_id: Int, pet_id: Int) {
-//        let url = "\(baseUrl)/users/\(user_id)/connections"
-//        Alamofire.request(url, method: .post, parameters: ["pet_id": pet_id], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-//            if let dataDict :Dictionary = response.value as? [String: Any] {
-//                print(dataDict)
-//            }
-//        }
-//    }
     
     
     func getPets(id: Int) {

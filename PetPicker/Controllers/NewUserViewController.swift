@@ -41,6 +41,14 @@ class NewUserViewController: UIViewController {
             let pp = PPApi(sendingVC: self)
             pp.createUserApi(data: data)
     }
+    
+    var loggedInUser: User?
+    
+    func loginSegue(user: User) {
+        loggedInUser = user
+        performSegue(withIdentifier: "successfulLogin", sender: nil)
+    }
+    
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //

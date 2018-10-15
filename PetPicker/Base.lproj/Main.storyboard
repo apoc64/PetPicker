@@ -562,6 +562,7 @@
                         <outlet property="userPic" destination="m3g-1V-jfo" id="AZP-HT-GZW"/>
                         <outlet property="userRole" destination="NsE-Bt-dwX" id="AO4-eK-jdx"/>
                         <outlet property="userSpecies" destination="6zy-cp-Bar" id="XBY-FX-grY"/>
+                        <segue destination="0hu-Iq-bnO" kind="show" identifier="successfulLogin" id="CP0-8G-NJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhd-fL-Mpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -575,7 +576,7 @@
         <image name="pizzacat" width="736" height="284"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d6k-aN-HrX"/>
+        <segue reference="CP0-8G-NJf"/>
         <segue reference="yNg-Q9-eAH"/>
     </inferredMetricsTieBreakers>
 </document>
