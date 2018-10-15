@@ -36,6 +36,26 @@ class PPApi {
         }
     }
     
+    func createUserApi(data: [String: Any]) {
+        let url = "\(baseUrl)/users"
+        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON
+            { (response) in
+                if let dataDict :Dictionary = response.value as? [String: Any] {
+                    print(dataDict)
+                }
+            }
+        }
+    
+//    func likePet(user_id: Int, pet_id: Int) {
+//        let url = "\(baseUrl)/users/\(user_id)/connections"
+//        Alamofire.request(url, method: .post, parameters: ["pet_id": pet_id], encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            if let dataDict :Dictionary = response.value as? [String: Any] {
+//                print(dataDict)
+//            }
+//        }
+//    }
+    
+    
     func getPets(id: Int) {
         let url = "\(baseUrl)/users/\(id)/pets"
         Alamofire.request(url).responseJSON { (response) in

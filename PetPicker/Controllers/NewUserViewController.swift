@@ -18,20 +18,35 @@ class NewUserViewController: UIViewController {
     @IBOutlet weak var userSpecies: UIPickerView!
     @IBOutlet weak var userRole: UISwitch!
     @IBAction func userSave(_ sender: UIButton) {
-        print("username: \(userName.text)")
-        print("pass:\(userPass.text)")
-        print("confirm:\(confirmUserPass.text)")
-        print("pic:\(userPic.text)")
-        print("description: \(userDesc.text)")
-        print("role:\(userRole.isOn)")
-        print("species:\(userSpecies)")
+//        print("username: \(userName.text)")
+//        print("pass:\(userPass.text)")
+//        print("confirm:\(confirmUserPass.text)")
+//        print("pic:\(userPic.text)")
+//        print("description: \(userDesc.text)")
+//        print("role:\(userRole.isOn)")
+//        print("species:\(userSpecies)")
+        
+        guard userPass.text == confirmUserPass.text else {
+            print("password incorrect")
+            return
+        }
+        var roleString = "adopter"
+        
+        if userRole.isOn {
+            roleString = "owner"
+        }
+        
+        let data = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
+        
+            let pp = PPApi(sendingVC: self)
+            pp.createUserApi(data: data)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        // Do any additional setup after loading the view.
+//    }
 
-        // Do any additional setup after loading the view.
-    }
-    
 
     /*
     // MARK: - Navigation
