@@ -362,10 +362,10 @@
             </objects>
             <point key="canvasLocation" x="1016.8" y="174.96251874062969"/>
         </scene>
-        <!--View Controller-->
+        <!--New User View Controller-->
         <scene sceneID="v0H-84-J8y">
             <objects>
-                <viewController id="Dx8-Pb-950" sceneMemberID="viewController">
+                <viewController id="Dx8-Pb-950" customClass="NewUserViewController" customModule="PetPicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7zA-qD-dnF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -488,6 +488,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.87058823529999996" green="0.36862745099999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="userSave:" destination="Dx8-Pb-950" eventType="touchUpInside" id="qeT-cr-ss6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oeX-2X-bqr">
                                 <rect key="frame" x="293" y="617" width="66" height="36"/>
@@ -495,6 +498,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.87058823529999996" green="0.36862745099999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="yNg-Q9-eAH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -548,6 +554,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KB8-Iw-zkM"/>
                     </view>
+                    <connections>
+                        <outlet property="confirmUserPass" destination="BPU-D4-0bs" id="ZwM-4Y-S2y"/>
+                        <outlet property="userDesc" destination="SpB-Rb-kpm" id="Amh-oH-myt"/>
+                        <outlet property="userName" destination="jJC-8Y-7Ba" id="0ea-56-qSQ"/>
+                        <outlet property="userPass" destination="AU1-1v-J7l" id="LmB-vc-BAj"/>
+                        <outlet property="userPic" destination="m3g-1V-jfo" id="AZP-HT-GZW"/>
+                        <outlet property="userRole" destination="NsE-Bt-dwX" id="AO4-eK-jdx"/>
+                        <outlet property="userSpecies" destination="6zy-cp-Bar" id="XBY-FX-grY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhd-fL-Mpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -561,5 +576,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="d6k-aN-HrX"/>
+        <segue reference="yNg-Q9-eAH"/>
     </inferredMetricsTieBreakers>
 </document>
