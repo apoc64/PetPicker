@@ -27,11 +27,10 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        let navVC = segue.destination as! UINavigationController
+        if let navVC = segue.destination as? UINavigationController {
         let swipeVC = navVC.viewControllers.first as! SwipeViewController
-        // Pass the selected object to the new view controller.
-        swipeVC.currentUser = loggedInUser
+            swipeVC.currentUser = loggedInUser
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
