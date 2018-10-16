@@ -1,6 +1,6 @@
 # PetSwipe iOS
 
-This app is an iOS swipe based matching app for pet adoption which consumes a Rails API. The Rails backend repo is located here: https://github.com/tywestlie/PetPicker. 
+This app is an iOS swipe based matching app for pet adoption which consumes a Rails API. The Rails backend repo is located here: https://github.com/tywestlie/PetPicker. The deployed backend is here: https://pet-picker-api.herokuapp.com/
 
 ## Swift Version
 
@@ -30,6 +30,9 @@ Click and hold the run button until a dropdown shows the test button, or press c
 
 ### Running the app on a device
 You will need an Apple developer account. You can visit the Apple developer site at: https://developer.apple.com/
+
+### Using the API
+All API calls are made in the PPApi.swift service. To change the backend, you can change the baseUrl constant in that file.
 
 ## Contributors
 * Tyler Westlie: https://github.com/tywestlie
