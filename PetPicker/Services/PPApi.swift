@@ -48,16 +48,28 @@ class PPApi {
         }
     }
     
+    func updateUserApi(data: [String: Any], id: Int) {
+        let url = "\(baseUrl)/users/\(id)"
+        Alamofire.request(url, method: .patch, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON {
+            (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                self.createUser(data: data, dataDict: dataDict)
+            }
+        }
+    }
+    
     func createUser(data: [String: Any], dataDict: [String: Any]) {
         let user = User(data: data["user"] as! [String : Any])
-        user.id = dataDict["id"] as? Int
-        print(user.name, user.description)
-        print("THIS IS THE DATA: \(data)")
-        user.setAsDefault()
-        if let vc = self.sender as? NewUserViewController {
-            vc.loginSegue(user: user)
+        if let id = dataDict["id"] as? Int {
+            user.id = id
+            print(user.name, user.description)
+            print("THIS IS THE DATA: \(data)")
+            user.setAsDefault()
+            if let vc = self.sender as? NewUserViewController {
+                vc.loginSegue(user: user)
+            }
+            print(dataDict)
         }
-        print(dataDict)
     }
     
     func getPets(id: Int) {

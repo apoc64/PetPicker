@@ -182,7 +182,10 @@ class SwipeViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as? MatchesTableViewController
-        vc?.currentUser = currentUser
+        if let vc = segue.destination as? MatchesTableViewController {
+            vc.currentUser = currentUser
+        } else if let vc = segue.destination as? ProfieViewController {
+            vc.user = currentUser
+        }
     }
 }

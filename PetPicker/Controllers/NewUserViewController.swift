@@ -18,13 +18,6 @@ class NewUserViewController: UIViewController {
     @IBOutlet weak var userSpecies: UIPickerView!
     @IBOutlet weak var userRole: UISwitch!
     @IBAction func userSave(_ sender: UIButton) {
-//        print("username: \(userName.text)")
-//        print("pass:\(userPass.text)")
-//        print("confirm:\(confirmUserPass.text)")
-//        print("pic:\(userPic.text)")
-//        print("description: \(userDesc.text)")
-//        print("role:\(userRole.isOn)")
-//        print("species:\(userSpecies)")
         
         guard userPass.text == confirmUserPass.text else {
             print("password incorrect")
