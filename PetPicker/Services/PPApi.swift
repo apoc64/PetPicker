@@ -10,21 +10,23 @@ import Foundation
 import Alamofire
 
 class PPApi {
-    let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
-    var sender: UIViewController!
-    var pets: [Pet]!
+    private let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
+    private var sender: UIViewController!
+    private var pets: [Pet] = []
     
     init(sendingVC: UIViewController) {
         sender = sendingVC // for async callbacks
     }
     
     func login(name: String, password: String) {
-        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        print(encodedName!)
-        let encodedPassword = password.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        print(encodedPassword!)
-        let url = "\(baseUrl)/users?name=\(encodedName!)&password=\(encodedPassword!)"
-        loginApiCall(url: url)
+        if let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) {
+            let url = "\(baseUrl)/users?name=\(encodedName)&password=\(encodedPassword)"
+            loginApiCall(url: url)
+        }
+    }
+    
+    func urlSafe(string: String) -> String? { // adds percent signs for spaces
+        return string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     }
     
     func loginApiCall(url: String)  {
@@ -38,22 +40,25 @@ class PPApi {
     
     func createUserApi(data: [String: Any]) {
         let url = "\(baseUrl)/users"
-        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON
-            { (response) in
-                if let dataDict :Dictionary = response.value as? [String: Any] {
-                    let user = User(data: data["user"] as! [String : Any])
-                    user.id = dataDict["id"] as? Int
-                    print(user.name, user.description)
-                    print("THIS IS THE DATA: \(data)")
-                    user.setAsDefault()
-                    if let vc = self.sender as? NewUserViewController {
-                        vc.loginSegue(user: user)
-                    }
-                    print(dataDict)
-                }
+        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON {
+            (response) in
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                self.createUser(data: data, dataDict: dataDict)
             }
         }
+    }
     
+    func createUser(data: [String: Any], dataDict: [String: Any]) {
+        let user = User(data: data["user"] as! [String : Any])
+        user.id = dataDict["id"] as? Int
+        print(user.name, user.description)
+        print("THIS IS THE DATA: \(data)")
+        user.setAsDefault()
+        if let vc = self.sender as? NewUserViewController {
+            vc.loginSegue(user: user)
+        }
+        print(dataDict)
+    }
     
     func getPets(id: Int) {
         let url = "\(baseUrl)/users/\(id)/pets"
