@@ -18,35 +18,46 @@ class PPApi {
         sender = sendingVC // for async callbacks
     }
     
+    private func apiCall(path: String, method: HTTPMethod, params: [String: Any]?, completion: @escaping (DataResponse<Any>) -> Void) {
+        let url = "\(baseUrl)\(path)"
+        print("Making API call to: \(url), method: \(method), params: \(String(describing: params))")
+        Alamofire.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: completion)
+    }
+    
     func login(name: String, password: String) {
         if let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) {
-            let url = "\(baseUrl)/users?name=\(encodedName)&password=\(encodedPassword)"
-            loginApiCall(url: url)
+            let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
+            apiCall(path: url, method: .get, params: nil, completion: loginUserCompletion)
         }
     }
     
-    func urlSafe(string: String) -> String? { // adds percent signs for spaces
-        return string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-    }
-    
-    func loginApiCall(url: String)  {
-        print(url)
-        Alamofire.request(url).responseJSON { (response) in
-            if let dataDict :Dictionary = response.value as? [String: Any] {
-                self.newUser(data: dataDict)
-            }
+    private lazy var loginUserCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
+        print("Completing login user api call")
+        if let dataDict :Dictionary = response.value as? [String: Any] {
+            print("About to create new logged in user with data: \(dataDict)")
+            self.newUser(data: dataDict)
         }
     }
     
     func createUserApi(data: [String: Any]) {
-        let url = "\(baseUrl)/users"
-        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON {
-            (response) in
-            if let dataDict :Dictionary = response.value as? [String: Any] {
-                self.createUser(data: data, dataDict: dataDict)
-            }
-        }
+//        let url = "\(baseUrl)/users"
+        apiCall(path: "/users", method: .post, params: data, completion: loginUserCompletion)
+        
+//        Alamofire.request(url, method: .post, parameters: data, encoding: JSONEncoding.default, headers: nil).responseJSON {
+//            (response) in
+//            if let dataDict :Dictionary = response.value as? [String: Any] {
+//                self.createUser(data: data, dataDict: dataDict)
+//            }
+//        }
     }
+    
+//    private lazy var createUserCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
+//        print("Completing new user api call")
+//        if let dataDict :Dictionary = response.value as? [String: Any] {
+//            print("About to create new user with data: \(dataDict)")
+//            self.newUser(data: dataDict)
+//        }
+//    }
     
     func updateUserApi(data: [String: Any], id: Int) {
         let url = "\(baseUrl)/users/\(id)"
@@ -111,18 +122,22 @@ class PPApi {
         }
     }
     
+    // Used for logging in or creating new user:
     func newUser(data: [String: Any]) {
-        // check to see if successful
-        print(data)
-        if (data["message"] != nil) {
+        print("User data: \(data)")
+        if (data["message"] != nil) { // if unsuccessful
             print(data["message"]!)
             // handle failed login
-        } else {
+        } else { // set successful action
             let user = User(data: data)
             user.setAsDefault()
-            
+            // Logging in:
             if let vc = sender as? ViewController {
                 vc.loginSegue(user: user) // sender performs segue
+            }
+            // Creating new:
+            if let vc = self.sender as? NewUserViewController {
+                vc.loginSegue(user: user)
             }
         }
     }
@@ -143,6 +158,10 @@ class PPApi {
                 print(dataDict)
             }
         }
+    }
+    
+    private func urlSafe(string: String) -> String? { // adds percent signs for spaces
+        return string.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     }
 }
 
