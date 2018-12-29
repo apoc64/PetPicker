@@ -31,8 +31,9 @@ class NewUserViewController: UIViewController {
         
         let data = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
         
-            let pp = PPApi(sendingVC: self)
-            pp.createUserApi(data: data)
+            let pp = PPApi.shared
+//        (sendingVC: self)
+            pp.createUserApi(data: data, sender: self)
     }
     
     var loggedInUser: User?

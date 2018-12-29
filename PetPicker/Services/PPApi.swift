@@ -10,12 +10,14 @@ import Foundation
 import Alamofire
 
 class PPApi {
+    static let shared = PPApi()
+    
     private let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
-    private var sender: UIViewController!
+    private var sender: UIViewController?
     private var pets: [Pet] = []
     
-    init(sendingVC: UIViewController) {
-        sender = sendingVC // for async callbacks
+    private init() { // sendingVC: UIViewController
+//        sender = sendingVC // for async callbacks
     }
     
     // All actual API calls should use this method:
@@ -27,18 +29,21 @@ class PPApi {
     }
     
     // MARK: - User API methods
-    func login(name: String, password: String) { // From home screen VC
+    func login(name: String, password: String, sender: UIViewController) { // From home screen VC
         if let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) {
+            self.sender = sender
             let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
             apiCall(path: url, method: .get, params: nil, completion: loginUserCompletion)
         }
     }
     
-    func createUserApi(data: [String: Any]) { // From NewUserVC
+    func createUserApi(data: [String: Any], sender: UIViewController) { // From NewUserVC
+        self.sender = sender
         apiCall(path: "/users", method: .post, params: data, completion: loginUserCompletion)
     }
     
-    func updateUserApi(data: [String: Any], id: Int) { // From ProfileVC
+    func updateUserApi(data: [String: Any], id: Int, sender: UIViewController) { // From ProfileVC
+        self.sender = sender
         apiCall(path: "/users/\(id)", method: .patch, params: data, completion: loginUserCompletion)
     }
     
@@ -71,8 +76,9 @@ class PPApi {
     }
     
     // MARK: - Get Pets API methods
-    func getPets(id: Int) {
+    func getPets(id: Int, sender: UIViewController) {
         let url = "/users/\(id)/pets"
+        self.sender = sender
         apiCall(path: url, method: .get, params: nil, completion: getPetsCompletion)
     }
     
@@ -95,7 +101,8 @@ class PPApi {
     }
     
     // MARK: - Get matches API methods
-    func getMatches(id: Int) {
+    func getMatches(id: Int, sender: UIViewController) {
+        self.sender = sender
         apiCall(path: "/users/\(id)/matches", method: .get, params: nil, completion: getMatchesCompletion)
     }
     
@@ -118,11 +125,13 @@ class PPApi {
     }
     
     // MARK: - Pet swiping API Methods
-    func likePet(user_id: Int, pet_id: Int) {
+    func likePet(user_id: Int, pet_id: Int, sender: UIViewController) {
+        self.sender = sender
         apiCall(path: "/users/\(user_id)/connections", method: .post, params: ["pet_id": pet_id], completion: swipeCompletion)
     }
     
-    func nopePet(user_id: Int, pet_id: Int) {
+    func nopePet(user_id: Int, pet_id: Int, sender: UIViewController) {
+        self.sender = sender
         apiCall(path: "/users/\(user_id)/connections", method: .delete, params: ["pet_id": pet_id], completion: swipeCompletion)
     }
     

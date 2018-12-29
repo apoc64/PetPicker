@@ -17,8 +17,9 @@ class ViewController: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         print("Login button pressed")
         if let name = userName.text, let pass = password.text {
-            let pp = PPApi(sendingVC: self)
-            pp.login(name: name, password: pass)
+            let pp = PPApi.shared
+//            (sendingVC: self)
+            pp.login(name: name, password: pass, sender: self)
         }
     }
     

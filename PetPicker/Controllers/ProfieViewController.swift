@@ -32,8 +32,9 @@ class ProfieViewController: UIViewController {
         }
         let data = ["user": ["name": user.name, "description": user.description, "role": user.role]]
         
-        let pp = PPApi(sendingVC: self)
-        pp.updateUserApi(data: data, id: user.id)
+        let pp = PPApi.shared
+//        (sendingVC: self)
+        pp.updateUserApi(data: data, id: user.id, sender: self)
         user.setAsDefault()
         performSegue(withIdentifier: "savedProfile", sender: self)
     }
