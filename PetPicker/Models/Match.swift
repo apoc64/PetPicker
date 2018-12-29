@@ -19,7 +19,7 @@ class Match {
         id = data["id"] as? Int
         name = data["name"] as? String
         status = data["status"] as? String
-        adopter_id = data["adoper_id"] as? Int
+        adopter_id = data["adopter_id"] as? Int
         pet_id = data["pet_id"] as? Int
     }
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		01F88EB56AE6E7F19A65F10C /* Pods_PetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */; };
+		416B239B21D82B1A00F58C36 /* PetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B239A21D82B1A00F58C36 /* PetTests.swift */; };
+		416B239D21D82D4500F58C36 /* UserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B239C21D82D4500F58C36 /* UserTest.swift */; };
+		416B239F21D82D9F00F58C36 /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B239E21D82D9F00F58C36 /* MatchTest.swift */; };
 		41B36F5F2165629900634E36 /* PPApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F5E2165629900634E36 /* PPApi.swift */; };
 		41B36F622165640B00634E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F612165640B00634E36 /* User.swift */; };
 		41B36F64216666EB00634E36 /* ProfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F63216666EB00634E36 /* ProfieViewController.swift */; };
@@ -16,7 +19,6 @@
 		41E3547F2163E361008F508A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E3547D2163E361008F508A /* Main.storyboard */; };
 		41E354812163E362008F508A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41E354802163E362008F508A /* Assets.xcassets */; };
 		41E354842163E362008F508A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E354822163E362008F508A /* LaunchScreen.storyboard */; };
-		41E3548F2163E362008F508A /* PetPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E3548E2163E362008F508A /* PetPickerTests.swift */; };
 		41E3549A2163E362008F508A /* PetPickerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E354992163E362008F508A /* PetPickerUITests.swift */; };
 		4D21E1C9216D415F00403ED4 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21E1C8216D415F00403ED4 /* Pet.swift */; };
 		4D21E1CB216E9D5500403ED4 /* MatchesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21E1CA216E9D5500403ED4 /* MatchesTableViewController.swift */; };
@@ -47,6 +49,9 @@
 /* Begin PBXFileReference section */
 		08F7DF08664839621DF56AF9 /* Pods_PetPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF48CBBCBA995652CEB9C7F /* Pods_PetPickerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetPickerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		416B239A21D82B1A00F58C36 /* PetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTests.swift; sourceTree = "<group>"; };
+		416B239C21D82D4500F58C36 /* UserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTest.swift; sourceTree = "<group>"; };
+		416B239E21D82D9F00F58C36 /* MatchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
 		41B36F5E2165629900634E36 /* PPApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPApi.swift; sourceTree = "<group>"; };
 		41B36F612165640B00634E36 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		41B36F63216666EB00634E36 /* ProfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfieViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +63,6 @@
 		41E354832163E362008F508A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41E354852163E362008F508A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41E3548A2163E362008F508A /* PetPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		41E3548E2163E362008F508A /* PetPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPickerTests.swift; sourceTree = "<group>"; };
 		41E354902163E362008F508A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41E354952163E362008F508A /* PetPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PetPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E354992163E362008F508A /* PetPickerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetPickerUITests.swift; sourceTree = "<group>"; };
@@ -175,7 +179,9 @@
 		41E3548D2163E362008F508A /* PetPickerTests */ = {
 			isa = PBXGroup;
 			children = (
-				41E3548E2163E362008F508A /* PetPickerTests.swift */,
+				416B239A21D82B1A00F58C36 /* PetTests.swift */,
+				416B239C21D82D4500F58C36 /* UserTest.swift */,
+				416B239E21D82D9F00F58C36 /* MatchTest.swift */,
 				41E354902163E362008F508A /* Info.plist */,
 			);
 			path = PetPickerTests;
@@ -442,7 +448,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41E3548F2163E362008F508A /* PetPickerTests.swift in Sources */,
+				416B239D21D82D4500F58C36 /* UserTest.swift in Sources */,
+				416B239F21D82D9F00F58C36 /* MatchTest.swift in Sources */,
+				416B239B21D82B1A00F58C36 /* PetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
