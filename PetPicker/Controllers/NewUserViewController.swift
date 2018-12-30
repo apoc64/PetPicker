@@ -27,7 +27,7 @@ class NewUserViewController: UIViewController {
         }
         let roleString = userRole.isOn ? "owner" : "adopter"
         let userData = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
-        PPApi.shared.createUser(data: userData, completion: { (_) in
+        NetworkingManager.shared.createUser(data: userData, completion: { (_) in
             self.loginSegue()
         })
     }

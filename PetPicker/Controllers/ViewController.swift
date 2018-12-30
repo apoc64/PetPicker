@@ -16,8 +16,7 @@ class ViewController: UIViewController {
     
     @IBAction func login(_ sender: UIButton) {
         if let name = userName.text, let pass = password.text {
-            let pp = PPApi.shared
-            pp.loginUser(name: name, password: pass, completion: { (user) in
+            NetworkingManager.shared.loginUser(name: name, password: pass, completion: { (user) in
                 self.loginSegue(user: user)
             })
         }

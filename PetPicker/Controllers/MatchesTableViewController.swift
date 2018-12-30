@@ -23,7 +23,7 @@ class MatchesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        PPApi.shared.getMatches(id: currentUser!.id, completion: { (matches) in
+        NetworkingManager.shared.getMatches(id: currentUser!.id, completion: { (matches) in
             self.addMatches(matches: matches) })
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
