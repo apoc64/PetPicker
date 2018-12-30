@@ -10,14 +10,13 @@ import Foundation
 import Alamofire
 
 class PPApi {
+    // Shared instance Singleton:
     static let shared = PPApi()
+    private init() {}
     
     private let baseUrl = "https://pet-picker-api.herokuapp.com/api/v1"
     private var sender: UIViewController?
     private var pets: [Pet] = []
-    
-    private init() {
-    }
     
     // All actual API calls should use this method: - Move to service class to mock
     private func apiCall(path: String, method: HTTPMethod, params: [String: Any]?, completion: @escaping (DataResponse<Any>) -> Void) {
@@ -28,27 +27,28 @@ class PPApi {
     }
     
     // MARK: - User API methods
-    func login(name: String, password: String, completionHandler: @escaping ((User) -> Void)) {
+    func login(name: String, password: String, completion: @escaping ((User) -> Void)) {
         guard let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) else { return }
         let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
         apiCall(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completionHandler)
+            self.loginUser(data: response, completion: completion)
         })
     }
     
-    func createUserApi(data: [String: Any], completionHandler: @escaping ((User) -> Void)) {
+    func createUserApi(data: [String: Any], completion: @escaping ((User) -> Void)) {
         apiCall(path: "/users", method: .post, params: data, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completionHandler)
+            self.loginUser(data: response, completion: completion)
         })
     }
     
-    func updateUserApi(data: [String: Any], id: Int, completionHandler: @escaping ((User) -> Void)) {
+    func updateUserApi(data: [String: Any], id: Int, completion: @escaping ((User) -> Void)) {
         apiCall(path: "/users/\(id)", method: .patch, params: data, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completionHandler)
+            self.loginUser(data: response, completion: completion)
         })
     }
     
     // Recieves response, creates a Dictionary, passes to newUser, sends response to completion
+    // Rename userResponseHandler
     private func loginUser(data: DataResponse<Any>, completion: @escaping ((User) -> Void)) {
         print("Recieved response from user API call")
         if let dataDict :Dictionary = data.value as? [String: Any] {
@@ -60,6 +60,7 @@ class PPApi {
     }
     
     // Used for creating user object from dict, logging it in:
+    // Rename createUser
     private func newUser(data: [String: Any]) -> User? {
         print("About to create user data: \(data)")
         if (data["message"] != nil) { // if unsuccessful:
@@ -73,10 +74,10 @@ class PPApi {
     }
     
     // MARK: - Get Pets API methods
-    func getPets(id: Int, completionHandler: @escaping (([Pet]) -> Void)) {
+    func getPets(id: Int, completion: @escaping (([Pet]) -> Void)) {
         let url = "/users/\(id)/pets"
         apiCall(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
-            self.getPetsResponse(data: response, completion: completionHandler)
+            self.getPetsResponse(data: response, completion: completion)
         })
     }
     

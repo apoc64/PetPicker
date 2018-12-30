@@ -77,7 +77,7 @@ class SwipeViewController: UIViewController {
         if let bgPet = pets.first {
             setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
         } else if !outOfPets {
-            pp.getPets(id: currentUser!.id, completionHandler: { (pets) in
+            pp.getPets(id: currentUser!.id, completion: { (pets) in
                 self.addPets(newPets: pets)
             })
             print("Getting more pets")
@@ -175,7 +175,7 @@ class SwipeViewController: UIViewController {
         } else {
             currentUser = User.getUserFromDefault()
         }
-        pp.getPets(id: currentUser!.id, completionHandler: { (pets) in
+        pp.getPets(id: currentUser!.id, completion: { (pets) in
             self.addPets(newPets: pets)
         })
     }

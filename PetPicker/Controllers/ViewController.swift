@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         print("Login button pressed")
         if let name = userName.text, let pass = password.text {
             let pp = PPApi.shared
-            pp.login(name: name, password: pass, completionHandler: { (user) in
+            pp.login(name: name, password: pass, completion: { (user) in
                 self.loginSegue(user: user)
             })
         }

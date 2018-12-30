@@ -9,7 +9,7 @@
 import UIKit
 
 class NewUserViewController: UIViewController {
-
+    
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var userPass: UITextField!
     @IBOutlet weak var confirmUserPass: UITextField!
@@ -18,47 +18,22 @@ class NewUserViewController: UIViewController {
     @IBOutlet weak var userSpecies: UIPickerView!
     @IBOutlet weak var userRole: UISwitch!
     
-    @IBAction func userSave(_ sender: UIButton) { // add validation to enable
-        
+    // add validation to enable button
+    
+    @IBAction func userSave(_ sender: UIButton) {
         guard userPass.text == confirmUserPass.text else {
             print("password incorrect")
             return
         }
-        var roleString = "adopter"
-        
-        if userRole.isOn {
-            roleString = "owner"
-        }
-        
-        let data = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
+        let roleString = userRole.isOn ? "owner" : "adopter"
+        let userData = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
         let pp = PPApi.shared
-        pp.createUserApi(data: data, completionHandler: { (user) in
-            self.loginSegue(user: user)
-            })
+        pp.createUserApi(data: userData, completion: { (_) in
+            self.loginSegue()
+        })
     }
     
-    var loggedInUser: User?
-    
-    func loginSegue(user: User) {
-        loggedInUser = user
+    func loginSegue() {
         performSegue(withIdentifier: "successfulLogin", sender: nil)
     }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//    }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
