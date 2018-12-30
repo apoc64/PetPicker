@@ -17,7 +17,8 @@ class NewUserViewController: UIViewController {
     @IBOutlet weak var userDesc: UITextView!
     @IBOutlet weak var userSpecies: UIPickerView!
     @IBOutlet weak var userRole: UISwitch!
-    @IBAction func userSave(_ sender: UIButton) {
+    
+    @IBAction func userSave(_ sender: UIButton) { // add validation to enable
         
         guard userPass.text == confirmUserPass.text else {
             print("password incorrect")
@@ -30,10 +31,10 @@ class NewUserViewController: UIViewController {
         }
         
         let data = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
-        
-            let pp = PPApi.shared
-//        (sendingVC: self)
-            pp.createUserApi(data: data, sender: self)
+        let pp = PPApi.shared
+        pp.createUserApi(data: data, completionHandler: { (user) in
+            self.loginSegue(user: user)
+            })
     }
     
     var loggedInUser: User?

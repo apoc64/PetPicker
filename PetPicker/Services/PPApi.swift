@@ -37,9 +37,16 @@ class PPApi {
         }
     }
     
-    func createUserApi(data: [String: Any], sender: UIViewController) { // From NewUserVC
-        self.sender = sender
-        apiCall(path: "/users", method: .post, params: data, completion: loginUserCompletion)
+    func createUserApi(data: [String: Any], completionHandler: @escaping ((User) -> Void)) {
+        apiCall(path: "/users", method: .post, params: data, completion: { (response: (DataResponse<Any>)) in
+            print("Completing login user api call")
+            if let dataDict :Dictionary = response.value as? [String: Any] {
+                print("About to create new logged in user with data: \(dataDict)")
+                if let user = self.newUser(data: dataDict) {
+                    completionHandler(user)
+                }
+            }
+        })
     }
     
     func updateUserApi(data: [String: Any], id: Int, sender: UIViewController) { // From ProfileVC
@@ -56,22 +63,24 @@ class PPApi {
         }
     }
     // Used for logging in, creating, or updating user:
-    private func newUser(data: [String: Any]) {
+    private func newUser(data: [String: Any]) -> User? {
         print("About to create user data: \(data)")
         if (data["message"] != nil) { // if unsuccessful:
             print(data["message"]!)
+            return nil
         } else { // set successful action:
             let user = User(data: data)
             user.setAsDefault()
             // Logging in:
-            if let vc = sender as? ViewController {
-                vc.loginSegue(user: user) // sender performs segue
-            }
-            // Creating new:
-            if let vc = self.sender as? NewUserViewController {
-                vc.loginSegue(user: user)
-            }
+//            if let vc = sender as? ViewController {
+//                vc.loginSegue(user: user) // sender performs segue
+//            }
+//            // Creating new:
+//            if let vc = self.sender as? NewUserViewController {
+//                vc.loginSegue(user: user)
+//            }
             // Why does this work without profile vc?
+            return user
         }
     }
     
