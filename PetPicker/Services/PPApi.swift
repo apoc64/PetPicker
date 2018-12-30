@@ -114,21 +114,20 @@ class PPApi {
     }
     
     // MARK: - Pet swiping API Methods
-    func likePet(user_id: Int, pet_id: Int, sender: UIViewController) {
-        self.sender = sender
-        apiCall(path: "/users/\(user_id)/connections", method: .post, params: ["pet_id": pet_id], completion: swipeCompletion)
+    func likePet(user_id: Int, pet_id: Int, completion: (() -> Void)?) {
+        apiCall(path: "/users/\(user_id)/connections", method: .post, params: ["pet_id": pet_id], completion: { (response: (DataResponse<Any>)) in
+            self.swipeResponse(data: response, completion: completion)
+        })
     }
     
-    func nopePet(user_id: Int, pet_id: Int, sender: UIViewController) {
-        self.sender = sender
-        apiCall(path: "/users/\(user_id)/connections", method: .delete, params: ["pet_id": pet_id], completion: swipeCompletion)
+    func nopePet(user_id: Int, pet_id: Int, completion: (() -> Void)?) {
+        apiCall(path: "/users/\(user_id)/connections", method: .delete, params: ["pet_id": pet_id], completion: { (response: (DataResponse<Any>)) in
+            self.swipeResponse(data: response, completion: completion)
+        })
     }
     
-    private lazy var swipeCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
-        print("Completing get matches api call")
-        if let dataDict :Dictionary = response.value as? [String: Any] {
-            print("Swipe response: \(dataDict)")
-        }
+    private func swipeResponse(data: DataResponse<Any>, completion: (() -> Void)?) {
+        print("Recieved swipt API response data: \(data)")
     }
     
     // MARK: - Helper Method

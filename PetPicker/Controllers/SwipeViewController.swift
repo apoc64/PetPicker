@@ -110,14 +110,14 @@ class SwipeViewController: UIViewController {
     
     func likePet() { // Called from animation
         guard let currentPet = currentPet else { return }
-        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id, sender: self) // can crash on place holder
+        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
     
     func nopePet() { // Called from animation
         guard let currentPet = currentPet else { return }
-        pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id, sender: self) // can crash on place holder
+        pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
