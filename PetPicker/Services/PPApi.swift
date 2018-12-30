@@ -27,46 +27,39 @@ class PPApi {
     }
     
     // MARK: - User API methods
-    func login(name: String, password: String, completion: @escaping ((User) -> Void)) {
+    func loginUser(name: String, password: String, completion: @escaping ((User) -> Void)) {
         guard let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) else { return }
         let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
         apiCall(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completion)
+            self.userResponse(data: response, completion: completion)
         })
     }
     
-    func createUserApi(data: [String: Any], completion: @escaping ((User) -> Void)) {
+    func createUser(data: [String: Any], completion: @escaping ((User) -> Void)) {
         apiCall(path: "/users", method: .post, params: data, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completion)
+            self.userResponse(data: response, completion: completion)
         })
     }
     
-    func updateUserApi(data: [String: Any], id: Int, completion: @escaping ((User) -> Void)) {
+    func updateUser(data: [String: Any], id: Int, completion: @escaping ((User) -> Void)) {
         apiCall(path: "/users/\(id)", method: .patch, params: data, completion: { (response: (DataResponse<Any>)) in
-            self.loginUser(data: response, completion: completion)
+            self.userResponse(data: response, completion: completion)
         })
     }
     
-    // Recieves response, creates a Dictionary, passes to newUser, sends response to completion
-    // Rename userResponseHandler
-    private func loginUser(data: DataResponse<Any>, completion: @escaping ((User) -> Void)) {
-        print("Recieved response from user API call")
-        if let dataDict :Dictionary = data.value as? [String: Any] {
-            print("About to create new logged in user with data: \(dataDict)")
-            if let user = self.newUser(data: dataDict) {
-                completion(user)
-            } // else return ??? error?
+    private func userResponse(data: DataResponse<Any>, completion: @escaping ((User) -> Void)) {
+        print("Recieved user API response data: \(data)")
+        guard let dataDict :Dictionary = data.value as? [String: Any] else { return  }
+        if let user = self.createUser(data: dataDict) {
+            completion(user)
         }
     }
     
-    // Used for creating user object from dict, logging it in:
-    // Rename createUser
-    private func newUser(data: [String: Any]) -> User? {
-        print("About to create user data: \(data)")
-        if (data["message"] != nil) { // if unsuccessful:
-            print(data["message"]!)
+    private func createUser(data: [String: Any]) -> User? {
+        if (data["message"] != nil) {
+            print("Failed to create user. Message: \(data["message"]!)")
             return nil
-        } else { // set successful action:
+        } else {
             let user = User(data: data)
             user.setAsDefault()
             return user
@@ -85,13 +78,13 @@ class PPApi {
         print("Completing get pets api call")
         if let dataArray :Array = data.value as? [[String: Any]] {
             print("About to create new pets with data: \(dataArray)")
-            if let pets = self.newPets(data: dataArray) {
+            if let pets = self.createPets(data: dataArray) {
                 completion(pets)
             }
         }
     }
     
-    private func newPets(data: [[String: Any]]) -> [Pet]? {
+    private func createPets(data: [[String: Any]]) -> [Pet]? {
         let pets = data.map({
             (value: [String: Any]) -> Pet in
             return Pet(data: value)

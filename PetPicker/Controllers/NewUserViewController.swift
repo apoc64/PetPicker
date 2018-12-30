@@ -27,8 +27,7 @@ class NewUserViewController: UIViewController {
         }
         let roleString = userRole.isOn ? "owner" : "adopter"
         let userData = ["user": ["name": userName.text!, "password": userPass.text!, "description": userDesc.text!, "pic": userPic.text!, "role": roleString]]
-        let pp = PPApi.shared
-        pp.createUserApi(data: userData, completion: { (_) in
+        PPApi.shared.createUser(data: userData, completion: { (_) in
             self.loginSegue()
         })
     }
@@ -36,4 +35,6 @@ class NewUserViewController: UIViewController {
     func loginSegue() {
         performSegue(withIdentifier: "successfulLogin", sender: nil)
     }
+    
+    // Prepare - pass logged in user to swipt VC?
 }

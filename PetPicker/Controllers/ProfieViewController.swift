@@ -28,7 +28,7 @@ class ProfieViewController: UIViewController {
         user.role = roleSwitch.isOn ? "owner" : "adopter"
 
         let data = ["user": ["name": user.name, "description": user.description, "role": user.role]]
-        PPApi.shared.updateUserApi(data: data, id: user.id, completion: { (user) in
+        PPApi.shared.updateUser(data: data, id: user.id, completion: { (user) in
             self.performSegue(withIdentifier: "savedProfile", sender: self)
         })
     }
