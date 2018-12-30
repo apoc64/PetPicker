@@ -57,7 +57,7 @@ class NetworkingManager {
         }
     }
     
-    // MARK: - Get Pets API methods ... Response to [String: Any]?
+    // MARK: - Get Pets API methods
     func getPets(id: Int, completion: @escaping (([Pet]) -> Void)) {
         let url = "/users/\(id)/pets"
         ppService.request(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in

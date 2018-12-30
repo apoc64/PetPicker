@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 
+// enum for HTTP methods...
+
 class PPApi {
     // Shared instance Singleton:
     static let shared = PPApi()
