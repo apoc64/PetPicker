@@ -75,12 +75,10 @@ class PPApi {
     }
     
     private func getPetsResponse(data: DataResponse<Any>, completion: @escaping (([Pet]) -> Void)) {
-        print("Completing get pets api call")
-        if let dataArray :Array = data.value as? [[String: Any]] {
-            print("About to create new pets with data: \(dataArray)")
-            if let pets = self.createPets(data: dataArray) {
-                completion(pets)
-            }
+        print("Recieved get pets API response data: \(data)")
+        guard let dataArray :Array = data.value as? [[String: Any]] else { return }
+        if let pets = self.createPets(data: dataArray) {
+            completion(pets)
         }
     }
     
@@ -93,27 +91,26 @@ class PPApi {
     }
     
     // MARK: - Get matches API methods
-    func getMatches(id: Int, sender: UIViewController) {
-        self.sender = sender
-        apiCall(path: "/users/\(id)/matches", method: .get, params: nil, completion: getMatchesCompletion)
+    func getMatches(id: Int, completion: @escaping (([Match]) -> Void)) {
+        apiCall(path: "/users/\(id)/matches", method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
+            self.getMatchesResponse(data: response, completion: completion)
+        })
     }
     
-    private lazy var getMatchesCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
-        print("Completing get matches api call")
-        if let dataArray :Array = response.value as? [[String: Any]] {
-            print("About to create new matches with data: \(dataArray)")
-            self.newMatches(data: dataArray)
+    private func getMatchesResponse(data: DataResponse<Any>, completion: @escaping (([Match]) -> Void)) {
+        print("Recieved get matches API response data: \(data)")
+        guard let dataArray :Array = data.value as? [[String: Any]] else { return }
+        if let matches = self.createMatches(data: dataArray) {
+            completion(matches)
         }
     }
     
-    private func newMatches(data: [[String: Any]]) {
+    private func createMatches(data: [[String: Any]]) -> [Match]? {
         let matches = data.map({
             (value: [String: Any]) -> Match in
             return Match(data: value)
         })
-        if let vc = sender as? MatchesTableViewController {
-            vc.addMatches(matches: matches)
-        }
+        return matches
     }
     
     // MARK: - Pet swiping API Methods
