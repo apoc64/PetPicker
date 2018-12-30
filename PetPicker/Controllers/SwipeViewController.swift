@@ -77,7 +77,9 @@ class SwipeViewController: UIViewController {
         if let bgPet = pets.first {
             setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
         } else if !outOfPets {
-            pp.getPets(id: currentUser!.id, sender: self)
+            pp.getPets(id: currentUser!.id, completionHandler: { (pets) in
+                self.addPets(newPets: pets)
+            })
             print("Getting more pets")
         } else {
             noPets()
@@ -167,14 +169,15 @@ class SwipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pp = PPApi.shared
-//        (sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         if let user = currentUser  {
             print("Current user: \(String(describing: user)), \(String(describing: user.name)), \(String(describing: user.id))")
         } else {
             currentUser = User.getUserFromDefault()
         }
-        pp.getPets(id: currentUser!.id, sender: self)
+        pp.getPets(id: currentUser!.id, completionHandler: { (pets) in
+            self.addPets(newPets: pets)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

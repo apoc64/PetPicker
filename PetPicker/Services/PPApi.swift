@@ -73,28 +73,29 @@ class PPApi {
     }
     
     // MARK: - Get Pets API methods
-    func getPets(id: Int, sender: UIViewController) {
+    func getPets(id: Int, completionHandler: @escaping (([Pet]) -> Void)) {
         let url = "/users/\(id)/pets"
-        self.sender = sender
-        apiCall(path: url, method: .get, params: nil, completion: getPetsCompletion)
+        apiCall(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
+            self.getPetsResponse(data: response, completion: completionHandler)
+        })
     }
     
-    private lazy var getPetsCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
+    private func getPetsResponse(data: DataResponse<Any>, completion: @escaping (([Pet]) -> Void)) {
         print("Completing get pets api call")
-        if let dataArray :Array = response.value as? [[String: Any]] {
+        if let dataArray :Array = data.value as? [[String: Any]] {
             print("About to create new pets with data: \(dataArray)")
-            self.newPets(data: dataArray)
+            if let pets = self.newPets(data: dataArray) {
+                completion(pets)
+            }
         }
     }
     
-    private func newPets(data: [[String: Any]]) {
+    private func newPets(data: [[String: Any]]) -> [Pet]? {
         let pets = data.map({
             (value: [String: Any]) -> Pet in
             return Pet(data: value)
         })
-        if let vc = sender as? SwipeViewController {
-            vc.addPets(newPets: pets) // sender adds pets to vc array
-        }
+        return pets
     }
     
     // MARK: - Get matches API methods
