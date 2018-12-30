@@ -18,11 +18,12 @@ class ViewController: UIViewController {
         print("Login button pressed")
         if let name = userName.text, let pass = password.text {
             let pp = PPApi.shared
-//            (sendingVC: self)
-            pp.login(name: name, password: pass, sender: self)
+            pp.login(name: name, password: pass, completionHandler: { (user) in
+                self.loginSegue(user: user)
+            })
         }
     }
-    
+
     func loginSegue(user: User) {
         loggedInUser = user
         performSegue(withIdentifier: "successfulLogin", sender: nil)

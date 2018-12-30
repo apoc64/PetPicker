@@ -16,11 +16,10 @@ class PPApi {
     private var sender: UIViewController?
     private var pets: [Pet] = []
     
-    private init() { // sendingVC: UIViewController
-//        sender = sendingVC // for async callbacks
+    private init() {
     }
     
-    // All actual API calls should use this method:
+    // All actual API calls should use this method: - Move to service class to mock
     private func apiCall(path: String, method: HTTPMethod, params: [String: Any]?, completion: @escaping (DataResponse<Any>) -> Void) {
         // Add JWT logic here, add to url - AlamoFire doesn't support params in get requests
         let url = "\(baseUrl)\(path)"
@@ -29,40 +28,38 @@ class PPApi {
     }
     
     // MARK: - User API methods
-    func login(name: String, password: String, sender: UIViewController) { // From home screen VC
-        if let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) {
-            self.sender = sender
-            let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
-            apiCall(path: url, method: .get, params: nil, completion: loginUserCompletion)
-        }
+    func login(name: String, password: String, completionHandler: @escaping ((User) -> Void)) {
+        guard let encodedName = urlSafe(string: name), let encodedPassword = urlSafe(string: password) else { return }
+        let url = "/users?name=\(encodedName)&password=\(encodedPassword)"
+        apiCall(path: url, method: .get, params: nil, completion: { (response: (DataResponse<Any>)) in
+            self.loginUser(data: response, completion: completionHandler)
+        })
     }
     
     func createUserApi(data: [String: Any], completionHandler: @escaping ((User) -> Void)) {
         apiCall(path: "/users", method: .post, params: data, completion: { (response: (DataResponse<Any>)) in
-            print("Completing login user api call")
-            if let dataDict :Dictionary = response.value as? [String: Any] {
-                print("About to create new logged in user with data: \(dataDict)")
-                if let user = self.newUser(data: dataDict) {
-                    completionHandler(user)
-                }
-            }
+            self.loginUser(data: response, completion: completionHandler)
         })
     }
     
-    func updateUserApi(data: [String: Any], id: Int, sender: UIViewController) { // From ProfileVC
-        self.sender = sender
-        apiCall(path: "/users/\(id)", method: .patch, params: data, completion: loginUserCompletion)
+    func updateUserApi(data: [String: Any], id: Int, completionHandler: @escaping ((User) -> Void)) {
+        apiCall(path: "/users/\(id)", method: .patch, params: data, completion: { (response: (DataResponse<Any>)) in
+            self.loginUser(data: response, completion: completionHandler)
+        })
     }
     
-    // Completion handler for logging in, creating, or updating user:
-    private lazy var loginUserCompletion: (DataResponse<Any>) -> Void  = { (response: (DataResponse<Any>)) in
-        print("Completing login user api call")
-        if let dataDict :Dictionary = response.value as? [String: Any] {
+    // Recieves response, creates a Dictionary, passes to newUser, sends response to completion
+    private func loginUser(data: DataResponse<Any>, completion: @escaping ((User) -> Void)) {
+        print("Recieved response from user API call")
+        if let dataDict :Dictionary = data.value as? [String: Any] {
             print("About to create new logged in user with data: \(dataDict)")
-            self.newUser(data: dataDict)
+            if let user = self.newUser(data: dataDict) {
+                completion(user)
+            } // else return ??? error?
         }
     }
-    // Used for logging in, creating, or updating user:
+    
+    // Used for creating user object from dict, logging it in:
     private func newUser(data: [String: Any]) -> User? {
         print("About to create user data: \(data)")
         if (data["message"] != nil) { // if unsuccessful:
@@ -71,15 +68,6 @@ class PPApi {
         } else { // set successful action:
             let user = User(data: data)
             user.setAsDefault()
-            // Logging in:
-//            if let vc = sender as? ViewController {
-//                vc.loginSegue(user: user) // sender performs segue
-//            }
-//            // Creating new:
-//            if let vc = self.sender as? NewUserViewController {
-//                vc.loginSegue(user: user)
-//            }
-            // Why does this work without profile vc?
             return user
         }
     }
