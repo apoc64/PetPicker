@@ -21,14 +21,20 @@ class NetworkingManagerTest: XCTestCase {
     
     func testItCanGetMatches() {
         // Depends on real API
-        let exp = expectation(description: "Wait for real API response")
-        NetworkingManager.shared.getMatches(id: 2, completion: { (matches) in
+        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
+        let nm = NetworkingManager.shared
+//        nm.ppService = MockService()
+        nm.getMatches(id: 2, completion: { (matches) in
             XCTAssert(matches.count == 2)
             if let match = matches.first {
                 XCTAssert(match.id == 2)
                 XCTAssert(match.name == "Bongo")
             } else {
                 XCTAssert(false)
+            }
+            if let match = matches.last {
+                XCTAssert(match.id == 4)
+                XCTAssert(match.name == "Jimmy")
             }
             exp.fulfill()
         })
@@ -39,3 +45,14 @@ class NetworkingManagerTest: XCTestCase {
     }
 
 }
+
+
+
+//class MockService: PPApi {
+//    override init() {
+//        super.init
+//    }
+//    override func request(path: String, method: HTTPMethod, params: [String : Any]?, completion: @escaping (DataResponse<Any>) -> Void) {
+//        print("Mock function run")
+//    }
+//}
