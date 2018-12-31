@@ -25,19 +25,14 @@ class ProfieViewController: UIViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
         user.description = descriptionView.text
-        if roleSwitch.isOn {
-            user.role = "owner"
-        } else {
-            user.role = "adopter"
-        }
+        user.role = roleSwitch.isOn ? "owner" : "adopter"
+
         let data = ["user": ["name": user.name, "description": user.description, "role": user.role]]
-        
-        let pp = PPApi(sendingVC: self)
-        pp.updateUserApi(data: data, id: user.id)
-        user.setAsDefault()
-        performSegue(withIdentifier: "savedProfile", sender: self)
+        NetworkingManager.shared.updateUser(data: data, id: user.id, completion: { (user) in
+            self.performSegue(withIdentifier: "savedProfile", sender: self)
+        })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = user.name
@@ -46,22 +41,14 @@ class ProfieViewController: UIViewController {
         if user.role == "owner" {
             roleSwitch.isOn = true
         }
-        
     }
-    
-
     
 //    MARK: - Navigation
     
-//    In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        Get the new view controller using segue.destination.
-//        Pass the selected object to the new view controller.
         if let navVC = segue.destination as? UINavigationController {
             let swipeVC = navVC.viewControllers.first as! SwipeViewController
             swipeVC.currentUser = user
         }
     }
-    
-    
 }

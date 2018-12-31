@@ -77,7 +77,9 @@ class SwipeViewController: UIViewController {
         if let bgPet = pets.first {
             setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
         } else if !outOfPets {
-            pp.getPets(id: currentUser!.id)
+            NetworkingManager.shared.getPets(id: currentUser!.id, completion: { (pets) in
+                self.addPets(newPets: pets)
+            })
             print("Getting more pets")
         } else {
             noPets()
@@ -108,14 +110,14 @@ class SwipeViewController: UIViewController {
     
     func likePet() { // Called from animation
         guard let currentPet = currentPet else { return }
-        pp.likePet(user_id: currentUser!.id, pet_id: currentPet.id) // can crash on place holder
+        NetworkingManager.shared.likePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
     
     func nopePet() { // Called from animation
         guard let currentPet = currentPet else { return }
-        pp.nopePet(user_id: currentUser!.id, pet_id: currentPet.id) // can crash on place holder
+        NetworkingManager.shared.nopePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
@@ -166,14 +168,15 @@ class SwipeViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        pp = PPApi(sendingVC: self)
         divisor = (view.frame.width / 2) / 0.5
         if let user = currentUser  {
             print("Current user: \(String(describing: user)), \(String(describing: user.name)), \(String(describing: user.id))")
         } else {
             currentUser = User.getUserFromDefault()
         }
-        pp.getPets(id: currentUser!.id)
+        NetworkingManager.shared.getPets(id: currentUser!.id, completion: { (pets) in
+            self.addPets(newPets: pets)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
