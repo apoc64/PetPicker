@@ -43,8 +43,72 @@ class NetworkingManagerTest: XCTestCase {
             print(error?.localizedDescription ?? "")
         })
     }
+    
+    func testItCanGetPets() {
+        // Depends on real API
+        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
+        let nm = NetworkingManager.shared
+        //        nm.ppService = MockService()
+        nm.getPets(id: 3, completion: { (pets) in
+            XCTAssert(pets.count == 8)
+            if let pet = pets.first {
+                XCTAssert(pet.id == 8)
+                XCTAssert(pet.name == "Frog")
+                XCTAssert(pet.description == "psum heckin angery woofer wow such tempt fluffer corgo borking doggo such treat, heckin puggo very good spot woofer, such treat waggy wags he made many woofs noodle horse.")
+            } else {
+                XCTAssert(false)
+            }
+            if let pet = pets.last {
+                XCTAssert(pet.id == 16)
+                XCTAssert(pet.name == "Tuty")
+                XCTAssert(pet.pic == "https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Cesars-Today-Top-Ten-Puppy-Tips.jpg?itok=T2AuVJHq")
+            }
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 1, handler: { (error) in
+            print(error?.localizedDescription ?? "")
+        })
+    }
+    
+    func testItCanLoginUser() {
+        // Depends on real API
+        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
+        let nm = NetworkingManager.shared
+        //        nm.ppService = MockService()
+        nm.loginUser(name: "steventyler", password: "123", completion: { (user) in
+            XCTAssert(user.id == 3)
+            XCTAssert(user.name == "steventyler")
+            XCTAssert(user.description == "Gimme your puppies! YOW!!")
+            XCTAssert(user.role == "adopter")
+            
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 1, handler: { (error) in
+            print(error?.localizedDescription ?? "")
+        })
+    }
+    
+    func testItCanLoginOwner() {
+        // Depends on real API
+        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
+        let nm = NetworkingManager.shared
+        //        nm.ppService = MockService()
+        nm.loginUser(name: "puppyboi", password: "123", completion: { (user) in
+            XCTAssert(user.id == 4)
+            XCTAssert(user.name == "puppyboi")
+            XCTAssert(user.description == "I like snakes!!!")
+            XCTAssert(user.role == "owner")
+            
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 1, handler: { (error) in
+            print(error?.localizedDescription ?? "")
+        })
+    }}
 
-}
 
 
 
