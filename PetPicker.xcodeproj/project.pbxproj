@@ -13,6 +13,7 @@
 		416B239F21D82D9F00F58C36 /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B239E21D82D9F00F58C36 /* MatchTest.swift */; };
 		416B23A121D8305B00F58C36 /* NetworkingManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B23A021D8305B00F58C36 /* NetworkingManagerTest.swift */; };
 		416B23A321D953E500F58C36 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416B23A221D953E500F58C36 /* NetworkingManager.swift */; };
+		41914A9221DB00EC00353C41 /* MockPPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41914A9121DB00EC00353C41 /* MockPPService.swift */; };
 		41B36F5F2165629900634E36 /* PPApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F5E2165629900634E36 /* PPApi.swift */; };
 		41B36F622165640B00634E36 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F612165640B00634E36 /* User.swift */; };
 		41B36F64216666EB00634E36 /* ProfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B36F63216666EB00634E36 /* ProfieViewController.swift */; };
@@ -56,6 +57,7 @@
 		416B239E21D82D9F00F58C36 /* MatchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
 		416B23A021D8305B00F58C36 /* NetworkingManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerTest.swift; sourceTree = "<group>"; };
 		416B23A221D953E500F58C36 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkingManager.swift; path = "PetPicker/New Group/NetworkingManager.swift"; sourceTree = SOURCE_ROOT; };
+		41914A9121DB00EC00353C41 /* MockPPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPPService.swift; sourceTree = "<group>"; };
 		41B36F5E2165629900634E36 /* PPApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPApi.swift; sourceTree = "<group>"; };
 		41B36F612165640B00634E36 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		41B36F63216666EB00634E36 /* ProfieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfieViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,15 @@
 				416B23A221D953E500F58C36 /* NetworkingManager.swift */,
 			);
 			name = Managers;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		41914A9321DB010E00353C41 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				41914A9121DB00EC00353C41 /* MockPPService.swift */,
+			);
+			name = Mocks;
 			path = "New Group";
 			sourceTree = "<group>";
 		};
@@ -193,6 +204,7 @@
 		41E3548D2163E362008F508A /* PetPickerTests */ = {
 			isa = PBXGroup;
 			children = (
+				41914A9321DB010E00353C41 /* Mocks */,
 				416B239A21D82B1A00F58C36 /* PetTests.swift */,
 				416B239C21D82D4500F58C36 /* UserTest.swift */,
 				416B239E21D82D9F00F58C36 /* MatchTest.swift */,
@@ -464,6 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41914A9221DB00EC00353C41 /* MockPPService.swift in Sources */,
 				416B23A121D8305B00F58C36 /* NetworkingManagerTest.swift in Sources */,
 				416B239D21D82D4500F58C36 /* UserTest.swift in Sources */,
 				416B239F21D82D9F00F58C36 /* MatchTest.swift in Sources */,

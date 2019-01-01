@@ -10,20 +10,20 @@ import XCTest
 @testable import PetPicker
 
 class NetworkingManagerTest: XCTestCase {
+    var nm: NetworkingManager!
+    
+    override func setUp() {
+        nm = NetworkingManager.shared
+        nm.ppService = MockService()
+    }
 
     func testNetworkingManagerSingleton() {
-        let service: Any = NetworkingManager.shared
-        XCTAssert(((service as? NetworkingManager) != nil))
-        
         let duplicate = NetworkingManager.shared
-        XCTAssert(duplicate === service as! NetworkingManager)
+        XCTAssert(duplicate === nm, "Shared returns the same instance")
     }
     
     func testItCanGetMatches() {
-        // Depends on real API
-        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
-        let nm = NetworkingManager.shared
-//        nm.ppService = MockService()
+        let exp = expectation(description: "Mock Async await")
         nm.getMatches(id: 2, completion: { (matches) in
             XCTAssert(matches.count == 2)
             if let match = matches.first {
@@ -45,16 +45,13 @@ class NetworkingManagerTest: XCTestCase {
     }
     
     func testItCanGetPets() {
-        // Depends on real API
-        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
-        let nm = NetworkingManager.shared
-        //        nm.ppService = MockService()
+        let exp = expectation(description: "Mock Async await")
         nm.getPets(id: 3, completion: { (pets) in
-            XCTAssert(pets.count == 7)
+            XCTAssert(pets.count == 3)
             if let pet = pets.first {
                 XCTAssert(pet.id == 1)
                 XCTAssert(pet.name == "Wanda")
-                XCTAssert(pet.description == "heckin angery woofer wow such tempt fluffer corgo borking doggo such treat, heckin puggo very good spot woofer, such treat waggy wags he made many woofs noodle horse.")
+                XCTAssert(pet.description == "heckin angery woofer wow such tempt fluffer")
             } else {
                 XCTAssert(false)
             }
@@ -72,10 +69,7 @@ class NetworkingManagerTest: XCTestCase {
     }
     
     func testItCanLoginUser() {
-        // Depends on real API
-        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
-        let nm = NetworkingManager.shared
-        nm.ppService = MockService()
+        let exp = expectation(description: "Mock Async await")
         nm.loginUser(name: "steventyler", password: "123", completion: { (user) in
             XCTAssert(user.id == 3)
             XCTAssert(user.name == "steventyler")
@@ -91,10 +85,7 @@ class NetworkingManagerTest: XCTestCase {
     }
     
     func testItCanLoginOwner() {
-        // Depends on real API
-        let exp = expectation(description: "Wait for real API response - should fail first time if server asleep")
-        let nm = NetworkingManager.shared
-        //        nm.ppService = MockService()
+        let exp = expectation(description: "Mock Async await")
         nm.loginUser(name: "puppyboi", password: "123", completion: { (user) in
             XCTAssert(user.id == 4)
             XCTAssert(user.name == "puppyboi")
@@ -109,13 +100,3 @@ class NetworkingManagerTest: XCTestCase {
         })
     }}
 
-
-import Alamofire
-
-class MockService: PPService {
-    
-    func request(path: String, method: HTTPMethod, params: [String : Any]?, completion: @escaping (Any) -> Void) {
-        
-        completion(["id": 3, "name": "steventyler", "description": "Gimme your puppies!", "role": "adopter"])
-    }
-}

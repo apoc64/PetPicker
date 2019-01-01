@@ -9,11 +9,9 @@
 import Foundation
 import Alamofire
 
-protocol PPService {
+protocol PPService { // Used for mocks for testing
     func request(path: String, method: HTTPMethod, params: [String: Any]?, completion: @escaping (Any) -> Void)
 }
-
-// enum for HTTP methods...
 
 class PPApi: PPService {
     // Shared instance Singleton:
