@@ -11,7 +11,7 @@ import Foundation
 class NetworkingManager {
     // Shared instance Singleton:
     static let shared = NetworkingManager()
-    var ppService: PPApi // was private let - test
+    var ppService: PPService // was private let - test
     private init() {
         ppService = PPApi.shared
     }
