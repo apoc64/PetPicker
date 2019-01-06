@@ -92,7 +92,7 @@
         <!--PetSwipe-->
         <scene sceneID="FjE-TG-Fhw">
             <objects>
-                <viewController id="2VX-G2-qal" customClass="SwipeViewController" customModule="PetPicker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SwipeViewControllerID" id="2VX-G2-qal" customClass="SwipeViewController" customModule="PetPicker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="axO-2W-Kha">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -674,6 +674,7 @@
         <image name="pizzacat" width="736" height="284"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Z9a-He-HVd"/>
         <segue reference="UGU-rc-CGC"/>
         <segue reference="SjP-1N-Pua"/>
     </inferredMetricsTieBreakers>
