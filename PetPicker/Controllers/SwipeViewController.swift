@@ -14,8 +14,7 @@ class SwipeViewController: UIViewController {
     // MARK: - Instance Variables
     var currentUser: User?
     private var pets: [Pet] = []
-    private var currentPet: Pet? // make not !
-    private var pp: PPApi!
+    private var currentPet: Pet?
     private var divisor: CGFloat! // for animation - set in VDL
     private var outOfPets = false
     private var stopAnimation = false
@@ -35,7 +34,7 @@ class SwipeViewController: UIViewController {
     @IBOutlet weak var cardDescription: UILabel!
     
     // MARK: - Pet Methods
-    func addPets(newPets: [Pet]){ // called from ppAPI
+    private func addPets(newPets: [Pet]){
         if newPets.count > 1 {
            let uniquePets = checkDuplicatePet(newPets: newPets)
             print("Adding \(uniquePets.count) pets")
@@ -51,19 +50,16 @@ class SwipeViewController: UIViewController {
         setPetsForCards()
     }
     
-    func checkDuplicatePet(newPets: [Pet]) -> [Pet] {
+    private func checkDuplicatePet(newPets: [Pet]) -> [Pet] {
         let petIds = pets.map({
             (value: Pet) -> Int in
             return value.id
         })
         print(petIds)
         return newPets
-//        newPets.filter {$0.id}
     }
     
-    func setPetsForCards() {
-//        guard var currentPet = currentPet else { return }
-//        print(currentPet.name)
+    private func setPetsForCards() {
         print("you have \(pets.count) left")
         if !pets.isEmpty {
             currentPet = pets.removeFirst()
@@ -73,7 +69,6 @@ class SwipeViewController: UIViewController {
         } else {
             print("pets is empty")
         }
-        // used to crash - ???:
         if let bgPet = pets.first {
             setPetForCard(pet: bgPet, cName: bgCardName, cImage: bgCardImage, cDescr: bgCardDescription)
         } else if !outOfPets {
@@ -86,7 +81,7 @@ class SwipeViewController: UIViewController {
         }
     }
     
-    func noPets() {
+    private func noPets() {
         if nextTimeEnd {
             print("I'm really out of pets this time")
             cardName.text = "No More Pets 🤮"
@@ -102,20 +97,20 @@ class SwipeViewController: UIViewController {
         }
     }
     
-    func setPetForCard(pet: Pet, cName: UILabel, cImage: UIImageView, cDescr: UILabel) {
+    private func setPetForCard(pet: Pet, cName: UILabel, cImage: UIImageView, cDescr: UILabel) {
         cImage.sd_setImage(with: URL(string: pet.pic), placeholderImage: UIImage(named: "placeholder.png"))
         cName.text = pet.name
         cDescr.text = pet.description
     }
     
-    func likePet() { // Called from animation
+    func likePet() { // Called from animation - Private?
         guard let currentPet = currentPet else { return }
         NetworkingManager.shared.likePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
         setPetsForCards()
     }
     
-    func nopePet() { // Called from animation
+    func nopePet() { // Called from animation - Private?
         guard let currentPet = currentPet else { return }
         NetworkingManager.shared.nopePet(user_id: currentUser!.id, pet_id: currentPet.id, completion: nil) // can crash on place holder
         resetCard(duration: 0)
@@ -123,7 +118,7 @@ class SwipeViewController: UIViewController {
     }
     
     // MARK: - Animation Methods
-    func resetCard(duration: Double) {
+    private func resetCard(duration: Double) {
         UIView.animate(withDuration: duration, animations: {
             self.card.center = self.view.center
             self.card.alpha = 1

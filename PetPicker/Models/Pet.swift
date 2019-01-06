@@ -9,19 +9,19 @@
 import Foundation
 
 class Pet {
-    var id: Int!
-    var name: String!
-    var species: String!
-    var description: String!
-    var pic: String!
-    var user_id: Int!
+    var id = 0
+    var name = ""
+    var species = ""
+    var description = ""
+    var pic = ""
+    var user_id = 0
     
     init(data: [String: Any]) {
-        id = data["id"] as? Int
-        name = data["name"] as? String
-        species = data["species"] as? String
-        description = data["description"] as? String
-        pic = data["pic"] as? String
-        user_id = data["user_id"] as? Int
+        id = data["id"] as? Int ?? 0
+        name = data["name"] as? String ?? ""
+        species = data["species"] as? String ?? ""
+        description = data["description"] as? String ?? ""
+        pic = data["pic"] as? String ?? ""
+        user_id = data["user_id"] as? Int ?? 0
     }
 }
